@@ -1,0 +1,43 @@
+@import 'src/scss/common';
+
+mat-card {
+  margin: 12px;
+  padding: 8px;
+
+  .team-card {
+    margin: 4px;
+    background-color: $LightGrey;
+
+    .banner-border {
+      @include boldText($medFontSize);
+      text-align: center;
+      margin: 2px 0px;
+      padding: 2px 0px;
+    }
+
+    .banner-center {
+      @include boldText($xxFontSize);
+      text-align: center;
+      color: $NearWhite;
+    }
+
+    .image-container {
+      margin: 8px;
+    }
+
+    .stanley-cup-trophy {
+      width: 100px;
+      height: 116px;
+      background-image: url('/assets/images/Trophy.png');
+      .stanley-cup-champ {
+        margin-top: 35px;
+        width: 45%;
+      }
+    }
+
+    td {
+      @include boldText($smFontSize);
+      text-align: center;
+    }
+  }
+}

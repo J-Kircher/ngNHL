@@ -1,0 +1,21 @@
+@import 'src/scss/common';
+
+mat-card {
+  margin: 12px;
+  padding: 8px;
+
+  .standings-text {
+    @include boldItalText($lgFontSize);
+    margin-top: 5px;
+  }
+
+  mat-tab-group {
+    background-color: $NearWhite;
+    border-radius: 5px;
+    padding: 5px;
+
+    .div-body {
+      margin: 2px;
+    }
+  }
+}

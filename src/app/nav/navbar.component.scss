@@ -1,0 +1,73 @@
+@import 'src/scss/common';
+
+.menu {
+  background: url('/assets/images/blueback.gif');
+  background-color: #333;
+  top: 0;
+  margin: 0px;
+  padding: 0px;
+  z-index: 99;
+  text-shadow: 5px 5px 5px black;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+
+  .menu-logo {
+    margin: 5px 20px;
+  }
+
+  .menu-link {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  a {
+    @include normalText($smFontSize);
+    color: white;
+    cursor: pointer;
+    padding: 14px 16px;
+    text-decoration: none;
+
+    &:hover {
+      border-color: $NHLColor;
+      background-color: $NHLColor;
+    }
+  }
+
+  .settings {
+    padding-right: 12px;
+  }
+
+  button {
+    margin: 10px;
+
+    &#Simulate {
+      width: 80px;
+      height: 32px;
+      line-height: 24px;
+
+      &.disabled {
+        background-color: rgba(0, 0, 0, 0.4);
+        color: rgba(200, 200, 200, 0.6);
+      }
+    }
+
+    &.settings-mini-fab {
+      padding: 0px;
+      width: 30px;
+      height: 30px;
+      color: $NearWhite;
+
+      mat-icon {
+        line-height: .7em;
+        font-size: $xxFontSize;
+      }
+    }
+  }
+
+  .spin {
+    @include matIconSpin(0.7s, 180deg, 25px, 25.5px);
+  }
+}

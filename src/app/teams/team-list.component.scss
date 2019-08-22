@@ -1,0 +1,33 @@
+@import 'src/scss/common';
+
+mat-card {
+  margin: 12px;
+  padding: 8px;
+}
+
+.team-head-text {
+  @include boldItalText($lgFontSize);
+  margin-top: 5px;
+}
+
+.team-container {
+  @include boldItalText($medFontSize);
+  text-shadow: 2px 2px 0 black;
+  cursor: pointer;
+  margin: 4px;
+  padding: 1px 1px 5px;
+  border-radius: 10px;
+  min-width: 190px;
+  // max-width: 240px;
+  // width: 100%;
+
+  .team-info {
+    margin: 5px;
+
+    .logo {
+      float: left;
+      margin-right: 5px;
+      height: 40px;
+    }
+  }
+}

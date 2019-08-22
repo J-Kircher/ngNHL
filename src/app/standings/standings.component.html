@@ -1,0 +1,26 @@
+<mat-card *ngIf="!loading">
+  <div class="standings-text">
+    Standings
+  </div>
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab label="Standard">
+      <div id="standard" fxLayout="row wrap">
+        <div class="div-body" fxFlex.lt-lg="calc(100% - 4px)" fxFlex.gt-md="calc(50% - 4px)" *ngFor="let division of divisions">
+          <standings-division [division]="division"></standings-division>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Expanded">
+      <div id="expanded" fxLayout="column">
+        <div class="div-body" *ngFor="let division of divisions">
+          <standings-division-expanded [division]="division"></standings-division-expanded>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
+
+<mat-card class="loading-well" *ngIf="loading">
+  <div class="loading-image"><img src="/assets/images/loading.gif" height="40px"></div>
+  <div class="loading-font">&nbsp; Loading Standings &hellip;</div>
+</mat-card>

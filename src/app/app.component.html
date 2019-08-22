@@ -1,0 +1,13 @@
+<nav-bar></nav-bar>
+<div fxLayout="row" fxLayoutAlign="space-around">
+  <div fxFlex class="content-wrapper">
+    <div fxLayout="row" fxLayout.lt-md="column">
+      <div fxFlex="75%" [@routeAnimations]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
+      <div fxFlex="25%">
+        <show-scores></show-scores>
+      </div>
+    </div>
+  </div>
+</div>

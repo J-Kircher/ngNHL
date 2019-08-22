@@ -1,0 +1,28 @@
+<div class="show-score" fxLayout="row" fxLayoutAlign="space-around center" *ngIf="!loading">
+  <div fxLayout="column" fxLayoutAlign="space-around center" fxFlex>
+    <div class="team-info">
+      <img src="/assets/images/{{teamsArr[score.visitTeam].abbrev}}.png" class="logo">
+      <span class="score">{{score.visitScore}}</span>
+      <span>
+        <span class="team-city">{{teamsArr[score.visitTeam].city}}</span><br>
+        <span class="team-name">{{teamsArr[score.visitTeam].name}}</span>
+      </span>
+    </div>
+    <div class="team-info">
+      <img src="/assets/images/{{teamsArr[score.homeTeam].abbrev}}.png" class="logo">
+      <span class="score">{{score.homeScore}}</span>
+      <span>
+        <span class="team-city">{{teamsArr[score.homeTeam].city}}</span><br>
+        <span class="team-name">{{teamsArr[score.homeTeam].name}}</span>
+      </span>
+    </div>
+  </div>
+  <div fxFlex="12px" *ngIf="showPeriod()">
+    <span class="period">{{ score.period }}</span>
+  </div>
+</div>
+
+<mat-card *ngIf="loading">
+  <div class="loading-image"><img src="/assets/images/loading.gif" height="40px"></div>
+  <div class="loading-font">&nbsp; Loading Game &hellip;</div>
+</mat-card>

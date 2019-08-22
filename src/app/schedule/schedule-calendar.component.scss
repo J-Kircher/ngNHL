@@ -1,0 +1,23 @@
+@import 'src/scss/common';
+
+mat-card {
+  margin: 12px;
+  padding: 8px;
+}
+
+.schedule {
+  .schedule-text {
+    @include boldItalText($lgFontSize);
+    margin-top: 5px;
+  }
+  .schedule-body {
+    max-height: 181px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    .month-container {
+      margin: 2px;
+      min-width: 248px;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+$nhl-theme-primary: mat-palette($mat-blue);
+$nhl-theme-accent : mat-palette($mat-blue, 200);
+$nhl-theme-warn   : mat-palette($mat-red);
+$nhl-theme: mat-light-theme(
+    $nhl-theme-primary,
+    $nhl-theme-accent,
+    $nhl-theme-warn
+);

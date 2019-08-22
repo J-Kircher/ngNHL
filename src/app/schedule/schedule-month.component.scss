@@ -1,0 +1,31 @@
+@import 'src/scss/common';
+
+.month {
+  @include boldItalText($medFontSize);
+  text-align: center;
+  background: $NHLColor;
+  height: 134px;
+  border-radius: 5px;
+  padding: 12px;
+
+  .month-table {
+    @include boldItalText($xsFontSize);
+    color: #666;
+    background: url(/assets/images/whiteback.gif);
+    height: 116px;
+    border-radius: 5px;
+
+    a {
+      color: $NHLLinkColor;
+      cursor: pointer;
+
+      &:hover {
+        border-color: $NHLColor;
+        background-color: $NHLTrans;
+      }
+    }
+    .no-link {
+      color: rgba(0, 0, 0, 0.3);
+    }
+  }
+}

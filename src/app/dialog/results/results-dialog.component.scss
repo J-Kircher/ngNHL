@@ -1,0 +1,66 @@
+@import 'src/scss/common';
+
+.dialog-title {
+  margin-bottom: 12px;
+
+  .dialog-title-text {
+    @include boldText($lgFontSize);
+  }
+  .gameday-text {
+    @include boldItalText($medFontSize);
+    margin: 6px;
+  }
+  button {
+    color: $NearWhite;
+    background-color: $NHLColor !important;
+  }
+}
+
+mat-dialog-content {
+  min-width: 420px;
+
+  mat-card {
+    background-color: $NearWhite;
+
+    .results {
+      @include boldItalText($medFontSize);
+      .visit {
+        text-align: left;
+      }
+      .home {
+        text-align: right;
+      }
+      .center {
+        text-align: center;
+      }
+      .team-city, .team-record {
+        @include normalText($medFontSize);
+      }
+      .team-name {
+        @include boldText($lgFontSize);
+      }
+      .spread {
+        @include normalText($medFontSize);
+      }
+      .logo {
+        text-align: left;
+        height: 40px;
+      }
+      .period {
+        height: 25px;
+        width: 100%;
+        background: $NHLColor;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 25px;
+      }
+      .normal {
+        @include normalText($medFontSize);
+        line-height: 30px;
+      }
+      .bold {
+        @include boldText($medFontSize);
+      }
+    }
+  }
+}

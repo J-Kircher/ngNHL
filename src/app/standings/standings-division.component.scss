@@ -1,0 +1,60 @@
+@import 'src/scss/common';
+
+mat-card {
+  margin: 12px;
+  padding: 8px;
+}
+
+.division {
+  @include boldItalText($medFontSize);
+  text-align: center;
+  background: $NHLColor;
+  padding: 12px;
+  margin: 0px;
+  border-radius: 5px;
+
+  table {
+    border-collapse: collapse;
+    border-style: hidden;
+
+    thead {
+      @include boldText($smFontSize);
+    }
+
+    td {
+      text-align: center;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    &.div-table {
+      @include normalText($smFontSize);
+      background: url(/assets/images/whiteback.gif);
+      border-radius: 5px;
+
+      .team-row {
+        &:hover {
+          border-color: $NHLColor;
+          background-color: $NHLTrans;
+        }
+
+        .team-info {
+          text-align: left;
+          white-space: nowrap;
+
+          .logo {
+            float: left;
+            height: 40px;
+          }
+          .team-city {
+            @include normalText($medFontSize);
+            padding-left: 5px;
+          }
+          .team-name {
+            @include boldText($lgFontSize);
+            padding-left: 5px;
+          }
+        }
+      }
+    }
+  }
+}

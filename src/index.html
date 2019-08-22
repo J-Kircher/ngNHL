@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NgNHL</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-nhl>
+    <style>
+      .loader { font-size: 16px; float: left; width: 1.5em; height: 1.5em; margin: 0.75em 0.25em;
+        border: 0.25em solid #6363a5; border-left: 0.25em solid #acadf4; border-radius: 50%;
+        transform: translateZ(0); animation: loader 0.7s infinite linear; position: relative; }
+      @-webkit-keyframes loader { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      @keyframes loader { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      .loading-well { border-radius: 5px; background-color: #272727; position: absolute; margin: 8px; padding: 8px;
+        width: auto; height: auto; z-index: 15; top: 40%; left: 50%; transform: translateX(-50%); }
+      .loading-font { float: right; font-size: 1.125em; color: #afafaf; padding: 12px 0; }
+      .one { font-size: 1.5em; opacity: 0; animation: dot 1.3s infinite; animation-delay: 0.0s; }
+      .two { font-size: 1.5em; opacity: 0; animation: dot 1.3s infinite; animation-delay: 0.2s; }
+      .three { font-size: 1.5em; opacity: 0; animation: dot 1.3s infinite; animation-delay: 0.4s; }
+      @-webkit-keyframes dot { 0% { opacity: 0; } 50% { opacity: 0; } 100% { opacity: 1; } }
+      @keyframes dot { 0% { opacity: 0; } 50% { opacity: 0; } 100% { opacity: 1; }
+      }
+    </style>
+    <div class="loading-well">
+      <div class="loader"></div>
+      <div class="loading-font">&nbsp; Loading NHL <span class="one">.</span><span class="two">.</span><span class="three">.</span></div>
+    </div>
+  </app-nhl>
+</body>
+</html>

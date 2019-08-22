@@ -1,0 +1,38 @@
+import { Component, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+import { ScheduleService } from './service/schedule.service';
+import { TeamService } from './service/team.service';
+import { fadeAnimation } from './shared/animations';
+
+@Component({
+  selector: 'app-nhl',
+  templateUrl: './app.component.html',
+  styles: [],
+  animations: [fadeAnimation]
+})
+
+export class AppComponent implements OnInit {
+  loading: boolean = false;
+  sport = 'NHL';
+
+  constructor(
+    private scheduleService: ScheduleService,
+    private teamService: TeamService
+  ) { }
+
+  ngOnInit() {
+    // Initialize the Full Schedule from the schedule input
+    this.scheduleService.buildFullSchedule();
+    this.teamService.initTeams();
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    // console.log('[app] prepareRoute() 1:');
+    // console.log(outlet.isActivated ? outlet.activatedRoute : '');
+    // return outlet.isActivated ? outlet.activatedRoute : '';
+
+    // console.log('[app] prepareRoute() route: ' + (outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation']));
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+}

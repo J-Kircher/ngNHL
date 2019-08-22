@@ -1,0 +1,217 @@
+@import 'src/scss/common';
+
+mat-card {
+  margin: 12px;
+  padding: 8px;
+}
+
+.playoffs {
+  .playoffs-text {
+    @include boldItalText($lgFontSize);
+    margin-top: 5px;
+  }
+
+  img {
+    border: 0px;
+  }
+
+  mat-tab-group {
+    background-color: $NearWhite;
+    border-radius: 5px;
+    padding: 5px;
+
+    .schedule {
+      .gameday-text {
+        @include boldItalText($medFontSize);
+        margin: 6px;
+      }
+
+      .gameday {
+        background-color: $LightGrey;
+        cursor: pointer;
+        margin: 6px;
+        transition: background-color 280ms cubic-bezier(.4,0,.2,1);
+
+        &:hover {
+          border-color: $NearBlack;
+          background-color: $NearWhite;
+        }
+      }
+    }
+
+    .bracket {
+      $side-margin: 40px;
+      $vertical-margin: 10px;
+      $line-color: $NHLColor;
+
+      .overlay {
+        width: 100%;
+        height: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        .stanley-cup-trophy {
+          width: 172px;
+          height: 200px;
+          background-image: url('/assets/images/StanleyCup.png');
+          .stanley-cup-champ {
+            margin-top: 50px;
+          }
+        }
+      }
+
+      .playoff-text {
+        @include boldItalText($medFontSize);
+        margin: 6px;
+      }
+
+      .wrapper {
+        display: flex;
+        height: 522px;
+        justify-content: center;
+
+        &.left {
+          .item {
+            display: flex;
+            flex-direction: row-reverse;
+            p {
+              padding: 0px;
+              margin: 0;
+              height: 50px;
+              width: 80px;
+              // background-color: $line-color;
+            }
+
+            &-parent {
+              position: relative;
+              margin-left: $side-margin;
+              display: flex;
+              align-items: center;
+              &:after {
+                  position: absolute;
+                  content: '';
+                  width: $side-margin/2;
+                  height: 2px;
+                  left: 0;
+                  top: 50%;
+                  background-color: $line-color;
+                  transform: translateX(-100%);
+              }
+            }
+            &-childrens {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            }
+            &-child {
+              display: flex;
+              align-items: flex-start;
+              justify-content: flex-end;
+              margin-top: $vertical-margin;
+              margin-bottom: $vertical-margin;
+              position: relative;
+              &:before {
+                content: '';
+                position: absolute;
+                background-color: $line-color;
+                right: 0;
+                top: 50%;
+                transform: translateX(100%);
+                width: $side-margin / 2;
+                height: 2px;
+              }
+              &:after {
+                content: '';
+                position: absolute;
+                background-color: $line-color;
+                right: -$side-margin / 2;
+                height: calc(50% + 22px) ;
+                width: 2px;
+                top: 50%;
+              }
+              &:last-child {
+                &:after {
+                  transform: translateY(-100%);
+                }
+              }
+              &:only-child:after {
+                display: none;
+              }
+            }
+          }
+        }
+        &.right {
+          .item {
+            display: flex;
+            flex-direction: row;
+            p {
+              padding: 0px;
+              margin: 0;
+              height: 50px;
+              width: 80px;
+              // background-color: $line-color;
+            }
+
+            &-parent {
+              position: relative;
+              margin-right: $side-margin;
+              display: flex;
+              align-items: center;
+              &:after {
+                  position: absolute;
+                  content: '';
+                  width: $side-margin/2;
+                  height: 2px;
+                  right: 0;
+                  top: 50%;
+                  background-color: $line-color;
+                  transform: translateX(100%);
+              }
+            }
+            &-childrens {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            }
+            &-child {
+              display: flex;
+              align-items: flex-start;
+              justify-content: flex-start;
+              margin-top: $vertical-margin;
+              margin-bottom: $vertical-margin;
+              position: relative;
+              &:before {
+                content: '';
+                position: absolute;
+                background-color: $line-color;
+                left: 0;
+                top: 50%;
+                transform: translateX(-100%);
+                width: $side-margin / 2;
+                height: 2px;
+              }
+              &:after {
+                content: '';
+                position: absolute;
+                background-color: $line-color;
+                left: -$side-margin / 2;
+                height: calc(50% + 22px) ;
+                width: 2px;
+                top: 50%;
+              }
+              &:last-child {
+                &:after {
+                  transform: translateY(-100%);
+                }
+              }
+              &:only-child:after {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

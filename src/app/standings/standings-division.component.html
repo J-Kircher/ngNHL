@@ -1,0 +1,39 @@
+<div *ngIf="!loading" class="division">
+  {{division}}
+  <table class="div-table" width="100%">
+    <thead>
+      <tr>
+        <td width="43%"></td>
+        <td width="9%">W</td>
+        <td width="9%">L</td>
+        <td width="9%">OTL</td>
+        <td width="10%" *ngIf="currentGame > 0">Pts</td>
+        <td width="10%" *ngIf="currentGame === 0">Total</td>
+        <td width="10%">GF</td>
+        <td width="10%">GA</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="team-row" *ngFor="let team of divisionTeams" (click)="showTeam(team.abbrev)">
+        <td class="team-info">
+          <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+          <span class="team-city">{{team.city}}</span>
+          <br>
+          <span class="team-name">{{team.name}}</span>
+        </td>
+        <td>{{team.wins}}</td>
+        <td>{{team.losses}}</td>
+        <td>{{team.otl}}</td>
+        <td *ngIf="currentGame > 0">{{team.points}}</td>
+        <td *ngIf="currentGame === 0">{{team.total}}</td>
+        <td>{{team.gf}}</td>
+        <td>{{team.ga}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<mat-card class="loading-well" *ngIf="loading">
+  <div class="loading-image"><img src="/assets/images/loading.gif" height="40px"></div>
+  <div class="loading-font">&nbsp; Loading Standings &hellip;</div>
+</mat-card>

@@ -1,0 +1,49 @@
+<div *ngIf="!loading" class="division">
+  {{division}}
+  <table class="div-table" width="100%">
+    <thead>
+      <tr>
+        <td width="24%"></td>
+        <td width="6%">W</td>
+        <td width="6%">L</td>
+        <td width="6%">OTL</td>
+        <td width="6%" *ngIf="currentGame > 0">Pts</td>
+        <td width="6%" *ngIf="currentGame === 0">Total</td>
+        <td width="6%">GF</td>
+        <td width="6%">GA</td>
+        <td width="8%">Home</td>
+        <td width="8%">Away</td>
+        <td width="8%">Div</td>
+        <td width="8%">{{division.indexOf('West') >= 0 ? 'WEST' : 'EAST'}}</td>
+        <td width="8%">{{division.indexOf('East') >= 0 ? 'WEST' : 'EAST'}}</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="team-row" *ngFor="let team of divisionTeams" (click)="showTeam(team.abbrev)">
+        <td class="team-info">
+          <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+          <span class="team-city">{{team.city}}</span>
+          <br>
+          <span class="team-name">{{team.name}}</span>
+        </td>
+        <td>{{team.wins}}</td>
+        <td>{{team.losses}}</td>
+        <td>{{team.otl}}</td>
+        <td *ngIf="currentGame > 0">{{team.points}}</td>
+        <td *ngIf="currentGame === 0">{{team.total}}</td>
+        <td>{{team.gf}}</td>
+        <td>{{team.ga}}</td>
+        <td>{{team.homewins}}-{{team.homelosses}}</td>
+        <td>{{team.visitwins}}-{{team.visitlosses}}</td>
+        <td>{{team.divwins}}-{{team.divlosses}}</td>
+        <td>{{team.confwins}}-{{team.conflosses}}</td>
+        <td>{{team.othwins}}-{{team.othlosses}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<mat-card class="loading-well" *ngIf="loading">
+  <div class="loading-image"><img src="/assets/images/loading.gif" height="40px"></div>
+  <div class="loading-font">&nbsp; Loading Expanded Standings &hellip;</div>
+</mat-card>

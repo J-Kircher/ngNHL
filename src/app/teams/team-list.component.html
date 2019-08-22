@@ -1,0 +1,17 @@
+<mat-card>
+  <div class="team-head-text">
+    NHL Teams
+  </div>
+  <div fxLayout="row wrap" fxLayout.xs="column wrap"
+    [@listAnimations]="{ value: teamsArr.length, params: { stagger: '50ms' } }">
+    <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let team of teamsArr">
+      <div class="team-container" (click)="showTeam(team.abbrev)"
+        [ngStyle]="{'color':'#'+team.lightcolor, 'background-color':'#'+team.darkcolor}">
+        <div class="team-info">
+          <img src="/assets/images/{{team.abbrev}}.png" class="logo">
+          <span>{{team.city}}<br>{{team.name}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>

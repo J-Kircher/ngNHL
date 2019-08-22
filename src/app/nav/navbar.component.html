@@ -1,0 +1,46 @@
+<mat-toolbar class="menu">
+
+  <div class="menu-logo"><img src="/assets/images/NHL.gif" height="50px"></div>
+
+  <div fxLayoutAlign="center" fxShow="false" fxShow.gt-sm>
+    <span class="menu-link"><a [routerLink]="['/teams']" id="show">Show Teams</a></span>
+    <span class="menu-link"><a [routerLink]="['/schedule']" id="schedule">Schedule</a></span>
+    <span class="menu-link"><a [routerLink]="['/standings']" id="standings">Standings</a></span>
+    <span class="menu-link"><a [routerLink]="['/playoffs']" id="playoffs" *ngIf="postseason">Playoffs</a></span>
+    <span class="menu-link"><a id="topTeams" (click)="getTopTeams()">Top Teams</a></span>
+    <span class="menu-link"><a id="help">Help</a></span>
+  </div>
+
+  <span fxFlex="1 1 auto"></span>
+
+  <button mat-raised-button id="Simulate" (click)="simulate()" [disabled]="simActive() || seasonOver"
+    [appSpinnerButton]="simActive()" [ngClass]="{ disabled: simActive() }">Simulate</button>
+
+  <div class="settings">
+    <div class="spin">
+      <button mat-icon-button class="settings-mini-fab" matTooltip="Settings" [matMenuTriggerFor]="settingsMenu">
+        <mat-icon>settings</mat-icon>
+      </button>
+      <mat-menu #settingsMenu>
+        <a mat-menu-item id="toggle"><mat-slide-toggle [(ngModel)]="oneGameAtATime">One Game at a Time</mat-slide-toggle></a>
+        <a mat-menu-item id="speed"><mat-slide-toggle [(ngModel)]="simFast">Sim Fast</mat-slide-toggle></a>
+        <a mat-menu-item id="reset" (click)="resetSeason()"><mat-icon>replay</mat-icon>Reset Season</a>
+      </mat-menu>
+    </div>
+  </div>
+
+  <a mat-button [matMenuTriggerFor]="mainMenu" fxHide="false" fxHide.gt-sm>
+    <mat-icon>more_vert</mat-icon>
+  </a>
+  <mat-menu #mainMenu>
+    <a mat-menu-item [routerLink]="['/teams']" id="show">Show Teams</a>
+    <a mat-menu-item [routerLink]="['/schedule']" id="schedule">Schedule</a>
+    <a mat-menu-item [routerLink]="['/standings']" id="standings">Standings</a>
+    <a mat-menu-item [routerLink]="['/playoffs']" id="playoffs" *ngIf="postseason">Playoffs</a>
+    <a mat-menu-item id="topTeams" (click)="getTopTeams()">Top Teams</a>
+    <a mat-menu-item id="help">Help</a>
+  </mat-menu>
+
+</mat-toolbar>
+
+<mat-progress-bar color="accent" mode="determinate" [value]="progress"></mat-progress-bar>

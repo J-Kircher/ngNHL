@@ -1,0 +1,33 @@
+@import 'src/scss/common';
+
+.dialog-title {
+  margin-bottom: 12px;
+
+  .dialog-title-text {
+    @include boldText($lgFontSize);
+  }
+  button {
+    color: $NearWhite;
+    background-color: $NHLColor !important;
+  }
+}
+
+mat-dialog-content {
+  mat-card {
+    background-color: $NearWhite;
+    // .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    //   background-color: green;
+    // }
+    mat-slide-toggle {
+      padding: 12px 0px;
+    }
+  }
+}
+
+mat-dialog-actions {
+  padding: 24px 0px;
+  button {
+    color: black;
+    background-color: $NHLColor !important;
+  }
+}
