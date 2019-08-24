@@ -10,7 +10,7 @@
 
   .month-table {
     @include boldItalText($xsFontSize);
-    color: #666;
+    // color: #666;
     background: url(/assets/images/whiteback.gif);
     height: 116px;
     border-radius: 5px;
@@ -25,7 +25,7 @@
       }
     }
     .no-link {
-      color: rgba(0, 0, 0, 0.3);
+      color: $NHLTrans;
     }
   }
 }
