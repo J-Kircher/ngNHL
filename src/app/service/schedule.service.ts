@@ -181,8 +181,8 @@ export class ScheduleService {
       game.period = 'F';
 
       // Update in case sim season timing slightly updates the records
-      game.visitRecord = visitTeam.wins + '-' + visitTeam.losses;
-      game.homeRecord = homeTeam.wins + '-' + homeTeam.losses;
+      game.visitRecord = visitTeam.wins + '-' + visitTeam.losses + '-' + visitTeam.otl;
+      game.homeRecord = homeTeam.wins + '-' + homeTeam.losses + '-' + homeTeam.otl;
 
       if (game.visitScore > game.homeScore) {
         // console.log('[schedule.service] playGame() Visitors Win');

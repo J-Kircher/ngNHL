@@ -18,8 +18,8 @@ export class PlayNHLGame {
     game.visitScore = 0;
     game.homeScore = 0;
 
-    game.visitRecord = vTeam.wins + '-' + vTeam.losses;
-    game.homeRecord = hTeam.wins + '-' + hTeam.losses;
+    game.visitRecord = vTeam.wins + '-' + vTeam.losses + '-' + vTeam.otl;
+    game.homeRecord = hTeam.wins + '-' + hTeam.losses + '-' + hTeam.otl;
 
     game.spread = calculateOdds(vTeam, hTeam);
 
