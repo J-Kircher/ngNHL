@@ -9,24 +9,24 @@
         <h3 class="heading">Playoff <img src="/assets/images/East.gif"> Picture</h3>
         <div fxLayout="row">
           <div fxLayout="column" class="division">
-            Division Leaders
-            <div class="div-team" *ngFor="let team of EastDivLeaders">
+            Metro
+            <div class="div-team" *ngFor="let team of EASTMetro">
               <div class="team-info" fxFlex>
                 <img src="/assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
-                <span class="team-record">{{team.wins}} - {{team.losses}}</span>
+                <span class="team-record">{{team.points}}</span>
                 <br>
                 <span class="team-name">{{team.name}}</span>
               </div>
             </div>
           </div>
           <div fxLayout="column" class="division">
-            Wildcards
-            <div class="div-team" *ngFor="let team of EastWildcard">
+            Atlantic
+            <div class="div-team" *ngFor="let team of EASTAtlantic">
               <div class="team-info" fxFlex>
                 <img src="/assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
-                <span class="team-record">{{team.wins}} - {{team.losses}}</span>
+                <span class="team-record">{{team.points}}</span>
                 <br>
                 <span class="team-name">{{team.name}}</span>
               </div>
@@ -34,11 +34,11 @@
           </div>
           <div fxLayout="column" class="division">
             On the Outside
-            <div class="div-team" *ngFor="let team of EastHunt">
+            <div class="div-team" *ngFor="let team of EASTHunt">
               <div class="team-info" fxFlex>
                 <img src="/assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
-                <span class="team-record">{{team.wins}} - {{team.losses}}</span>
+                <span class="team-record">{{team.points}}</span>
                 <br>
                 <span class="team-name">{{team.name}}</span>
               </div>
@@ -52,24 +52,24 @@
         <h3 class="heading">Playoff <img src="/assets/images/West.gif"> Picture</h3>
         <div fxLayout="row">
           <div fxLayout="column" class="division">
-            Division Leaders
-            <div class="div-team" *ngFor="let team of WestDivLeaders">
+            Central
+            <div class="div-team" *ngFor="let team of WESTCentral">
               <div class="team-info" fxFlex>
                 <img src="/assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
-                <span class="team-record">{{team.wins}} - {{team.losses}}</span>
+                <span class="team-record">{{team.points}}</span>
                 <br>
                 <span class="team-name">{{team.name}}</span>
               </div>
             </div>
           </div>
           <div fxLayout="column" class="division">
-            Wildcards
-            <div class="div-team" *ngFor="let team of WestWildcard">
+            Pacific
+            <div class="div-team" *ngFor="let team of WESTPacific">
               <div class="team-info" fxFlex>
                 <img src="/assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
-                <span class="team-record">{{team.wins}} - {{team.losses}}</span>
+                <span class="team-record">{{team.points}}</span>
                 <br>
                 <span class="team-name">{{team.name}}</span>
               </div>
@@ -77,11 +77,11 @@
           </div>
           <div fxLayout="column" class="division">
             On the Outside
-            <div class="div-team" *ngFor="let team of WestHunt">
+            <div class="div-team" *ngFor="let team of WESTHunt">
               <div class="team-info" fxFlex>
                 <img src="/assets/images/{{team.abbrev}}.png" class="logo">
                 <span class="team-city">{{team.city}}</span>
-                <span class="team-record">{{team.wins}} - {{team.losses}}</span>
+                <span class="team-record">{{team.points}}</span>
                 <br>
                 <span class="team-name">{{team.name}}</span>
               </div>
