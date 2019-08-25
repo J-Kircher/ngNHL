@@ -6,14 +6,14 @@ import { ISchedule, IScheduleBase, ITeam, IGameResults } from '../model/nhl.mode
 import { TeamService } from '../service/team.service';
 import { GameService } from '../service/game.service';
 import { StorageService } from '../service/storage.service';
-import { sortDivision, sortConference } from '../common/sort';
+import { sortDivision, sortConference, sortNonConference } from '../common/sort';
 import { PlayNHLGame } from '../shared/PlayNHLGame';
 
 const SCHEDULE: IScheduleBase[] = [
-  {'gameday': 'Wildcard Weekend', 'games': [4, 3, 10, 9, 5, 2, 11, 8]},
-  {'gameday': 'Division Championship', 'games': [3, 0, 9, 6, 2, 1, 8, 7]},
-  {'gameday': 'Conference Championship', 'games': [1, 0, 7, 6]},
-  {'gameday': 'Super Bowl', 'games': [6, 0]}
+  {'gameday': 'First Round', 'games': [3, 0, 11, 8, 7, 4, 15, 12, 2, 1, 10, 9, 6, 5, 14, 13]},
+  {'gameday': 'Second Round', 'games': [1, 0, 9, 8, 5, 4, 13, 12]},
+  {'gameday': 'Conference Championship', 'games': [4, 0, 12, 8]},
+  {'gameday': 'Stanley Cup', 'games': [0, 8]}
 ];
 
 @Injectable()
@@ -25,7 +25,7 @@ export class PlayoffService {
   EASTPlayoffTeams: number[] = [];
   WESTPlayoffTeams: number[] = [];
   PlayoffTeams: number[] = [];
-  PlayoffBracket: number[] = new Array(22);
+  PlayoffBracket: number[] = new Array(30);
   StanleyCupChamp: number;
 
   // Observable sources
@@ -140,81 +140,157 @@ export class PlayoffService {
       this.setCurrentPlayoffGameDay(this.currentPlayoffGameDay);
       console.log('[playoff.service] checkNextPlayoffRound() currentPlayoffGameDay: ' + this.currentPlayoffGameDay);
 
-      if (index === 1 && this.PLAYOFF_SCHEDULE[3].period === 'F') {
-        // console.log('[playoff.service] checkNextPlayoffRound() Division Round, check Wildcard Weekend results');
+      if (index === 1 && this.PLAYOFF_SCHEDULE[7].period === 'F') {
+        // console.log('[playoff.service] checkNextPlayoffRound() Second Round, check First Round results');
         if (this.PLAYOFF_SCHEDULE[0].visitScore > this.PLAYOFF_SCHEDULE[0].homeScore) {
-          this.PLAYOFF_SCHEDULE[4].visitTeam = this.PLAYOFF_SCHEDULE[0].visitTeam;
+          this.PLAYOFF_SCHEDULE[8].visitTeam = this.PLAYOFF_SCHEDULE[0].visitTeam;
+        } else {
+          this.PLAYOFF_SCHEDULE[8].homeTeam = this.PLAYOFF_SCHEDULE[0].homeTeam;
         }
         if (this.PLAYOFF_SCHEDULE[1].visitScore > this.PLAYOFF_SCHEDULE[1].homeScore) {
-          this.PLAYOFF_SCHEDULE[5].visitTeam = this.PLAYOFF_SCHEDULE[1].visitTeam;
+          this.PLAYOFF_SCHEDULE[9].visitTeam = this.PLAYOFF_SCHEDULE[1].visitTeam;
+        } else {
+          this.PLAYOFF_SCHEDULE[9].homeTeam = this.PLAYOFF_SCHEDULE[1].homeTeam;
         }
         if (this.PLAYOFF_SCHEDULE[2].visitScore > this.PLAYOFF_SCHEDULE[2].homeScore) {
-          this.PLAYOFF_SCHEDULE[4].visitTeam = this.PLAYOFF_SCHEDULE[2].visitTeam;
-          if (this.PLAYOFF_SCHEDULE[0].visitScore > this.PLAYOFF_SCHEDULE[0].homeScore) {
-            this.PLAYOFF_SCHEDULE[6].visitTeam = this.PLAYOFF_SCHEDULE[0].visitTeam;
-          } else {
-            this.PLAYOFF_SCHEDULE[6].visitTeam = this.PLAYOFF_SCHEDULE[0].homeTeam;
-          }
+          this.PLAYOFF_SCHEDULE[10].visitTeam = this.PLAYOFF_SCHEDULE[2].visitTeam;
+        } else {
+          this.PLAYOFF_SCHEDULE[10].homeTeam = this.PLAYOFF_SCHEDULE[2].homeTeam;
         }
         if (this.PLAYOFF_SCHEDULE[3].visitScore > this.PLAYOFF_SCHEDULE[3].homeScore) {
-          this.PLAYOFF_SCHEDULE[5].visitTeam = this.PLAYOFF_SCHEDULE[3].visitTeam;
-          if (this.PLAYOFF_SCHEDULE[1].visitScore > this.PLAYOFF_SCHEDULE[1].homeScore) {
-            this.PLAYOFF_SCHEDULE[7].visitTeam = this.PLAYOFF_SCHEDULE[1].visitTeam;
+          this.PLAYOFF_SCHEDULE[11].visitTeam = this.PLAYOFF_SCHEDULE[3].visitTeam;
+        } else {
+          this.PLAYOFF_SCHEDULE[11].homeTeam = this.PLAYOFF_SCHEDULE[3].homeTeam;
+        }
+        if (this.PLAYOFF_SCHEDULE[4].visitScore > this.PLAYOFF_SCHEDULE[4].homeScore) {
+          if (this.PLAYOFF_SCHEDULE[0].visitScore > this.PLAYOFF_SCHEDULE[0].homeScore) {
+            this.PLAYOFF_SCHEDULE[8].homeTeam = this.PLAYOFF_SCHEDULE[4].visitTeam;
           } else {
-            this.PLAYOFF_SCHEDULE[7].visitTeam = this.PLAYOFF_SCHEDULE[1].homeTeam;
-          }
-        }
-      }
-      if (index === 2 && this.PLAYOFF_SCHEDULE[7].period === 'F') {
-        // console.log('[playoff.service] checkNextPlayoffRound() Conference Round, check Division Round results');
-        if ( (this.PLAYOFF_SCHEDULE[4].visitScore > this.PLAYOFF_SCHEDULE[4].homeScore)
-          && (this.PLAYOFF_SCHEDULE[6].visitScore > this.PLAYOFF_SCHEDULE[6].homeScore) ) {
-          // console.log('EAST both div UPSET');
-          this.PLAYOFF_SCHEDULE[8].visitTeam = this.PLAYOFF_SCHEDULE[4].visitTeam;
-          this.PLAYOFF_SCHEDULE[8].homeTeam = this.PLAYOFF_SCHEDULE[6].visitTeam;
-        } else {
-          if (this.PLAYOFF_SCHEDULE[4].visitScore > this.PLAYOFF_SCHEDULE[4].homeScore) {
-            // console.log('EAST div UPSET 1');
             this.PLAYOFF_SCHEDULE[8].visitTeam = this.PLAYOFF_SCHEDULE[4].visitTeam;
-            this.PLAYOFF_SCHEDULE[8].homeTeam = this.PLAYOFF_SCHEDULE[6].homeTeam;
           }
-          if (this.PLAYOFF_SCHEDULE[6].visitScore > this.PLAYOFF_SCHEDULE[6].homeScore) {
-            // console.log('EAST div UPSET 2');
-            this.PLAYOFF_SCHEDULE[8].visitTeam = this.PLAYOFF_SCHEDULE[6].visitTeam;
+        } else {
+          if (this.PLAYOFF_SCHEDULE[0].visitScore > this.PLAYOFF_SCHEDULE[0].homeScore) {
             this.PLAYOFF_SCHEDULE[8].homeTeam = this.PLAYOFF_SCHEDULE[4].homeTeam;
+          } else {
+            this.PLAYOFF_SCHEDULE[8].visitTeam = this.PLAYOFF_SCHEDULE[4].homeTeam;
           }
         }
-        if ( (this.PLAYOFF_SCHEDULE[5].visitScore > this.PLAYOFF_SCHEDULE[5].homeScore)
-          && (this.PLAYOFF_SCHEDULE[7].visitScore > this.PLAYOFF_SCHEDULE[7].homeScore) ) {
-          // console.log('WEST both div UPSET');
-          this.PLAYOFF_SCHEDULE[9].visitTeam = this.PLAYOFF_SCHEDULE[5].visitTeam;
-          this.PLAYOFF_SCHEDULE[9].homeTeam = this.PLAYOFF_SCHEDULE[7].visitTeam;
-        } else {
-          if (this.PLAYOFF_SCHEDULE[5].visitScore > this.PLAYOFF_SCHEDULE[5].homeScore) {
-            // console.log('WEST div UPSET 1');
+        if (this.PLAYOFF_SCHEDULE[5].visitScore > this.PLAYOFF_SCHEDULE[5].homeScore) {
+          if (this.PLAYOFF_SCHEDULE[1].visitScore > this.PLAYOFF_SCHEDULE[1].homeScore) {
+            this.PLAYOFF_SCHEDULE[9].homeTeam = this.PLAYOFF_SCHEDULE[5].visitTeam;
+          } else {
             this.PLAYOFF_SCHEDULE[9].visitTeam = this.PLAYOFF_SCHEDULE[5].visitTeam;
-            this.PLAYOFF_SCHEDULE[9].homeTeam = this.PLAYOFF_SCHEDULE[7].homeTeam;
           }
-          if (this.PLAYOFF_SCHEDULE[7].visitScore > this.PLAYOFF_SCHEDULE[7].homeScore) {
-            // console.log('WEST div UPSET 2');
-            this.PLAYOFF_SCHEDULE[9].visitTeam = this.PLAYOFF_SCHEDULE[7].visitTeam;
+        } else {
+          if (this.PLAYOFF_SCHEDULE[1].visitScore > this.PLAYOFF_SCHEDULE[1].homeScore) {
             this.PLAYOFF_SCHEDULE[9].homeTeam = this.PLAYOFF_SCHEDULE[5].homeTeam;
+          } else {
+            this.PLAYOFF_SCHEDULE[9].visitTeam = this.PLAYOFF_SCHEDULE[5].homeTeam;
+          }
+        }
+        if (this.PLAYOFF_SCHEDULE[6].visitScore > this.PLAYOFF_SCHEDULE[6].homeScore) {
+          if (this.PLAYOFF_SCHEDULE[2].visitScore > this.PLAYOFF_SCHEDULE[2].homeScore) {
+            this.PLAYOFF_SCHEDULE[10].homeTeam = this.PLAYOFF_SCHEDULE[6].visitTeam;
+          } else {
+            this.PLAYOFF_SCHEDULE[10].visitTeam = this.PLAYOFF_SCHEDULE[6].visitTeam;
+          }
+        } else {
+          if (this.PLAYOFF_SCHEDULE[2].visitScore > this.PLAYOFF_SCHEDULE[2].homeScore) {
+            this.PLAYOFF_SCHEDULE[10].homeTeam = this.PLAYOFF_SCHEDULE[6].homeTeam;
+          } else {
+            this.PLAYOFF_SCHEDULE[10].visitTeam = this.PLAYOFF_SCHEDULE[6].homeTeam;
+          }
+        }
+        if (this.PLAYOFF_SCHEDULE[7].visitScore > this.PLAYOFF_SCHEDULE[7].homeScore) {
+          if (this.PLAYOFF_SCHEDULE[3].visitScore > this.PLAYOFF_SCHEDULE[3].homeScore) {
+            this.PLAYOFF_SCHEDULE[11].homeTeam = this.PLAYOFF_SCHEDULE[7].visitTeam;
+          } else {
+            this.PLAYOFF_SCHEDULE[11].visitTeam = this.PLAYOFF_SCHEDULE[7].visitTeam;
+          }
+        } else {
+          if (this.PLAYOFF_SCHEDULE[3].visitScore > this.PLAYOFF_SCHEDULE[3].homeScore) {
+            this.PLAYOFF_SCHEDULE[11].homeTeam = this.PLAYOFF_SCHEDULE[7].homeTeam;
+          } else {
+            this.PLAYOFF_SCHEDULE[11].visitTeam = this.PLAYOFF_SCHEDULE[7].homeTeam;
           }
         }
       }
-      if (index === 3 && this.PLAYOFF_SCHEDULE[9].period === 'F') {
-        // console.log('[playoff.service] checkNextPlayoffRound() Super Bowl, check Conference Round results');
-        if (this.PLAYOFF_SCHEDULE[8].visitScore > this.PLAYOFF_SCHEDULE[8].homeScore) {
-          // console.log('EAST UPSET conf game');
-          this.PLAYOFF_SCHEDULE[10].visitTeam = this.PLAYOFF_SCHEDULE[8].visitTeam;
+      if (index === 2 && this.PLAYOFF_SCHEDULE[11].period === 'F') {
+        // console.log('[playoff.service] checkNextPlayoffRound() Conference Round, check Second Round results');
+        if ( (this.PLAYOFF_SCHEDULE[8].visitScore > this.PLAYOFF_SCHEDULE[8].homeScore)
+          && (this.PLAYOFF_SCHEDULE[10].visitScore > this.PLAYOFF_SCHEDULE[10].homeScore) ) {
+          // console.log('EAST both div UPSET');
+          this.PLAYOFF_SCHEDULE[12].visitTeam = this.PLAYOFF_SCHEDULE[8].visitTeam;
+          this.PLAYOFF_SCHEDULE[12].homeTeam = this.PLAYOFF_SCHEDULE[10].visitTeam;
         } else {
-          this.PLAYOFF_SCHEDULE[10].visitTeam = this.PLAYOFF_SCHEDULE[8].homeTeam;
+          // console.log('EAST NO UPSET?');
+          this.PLAYOFF_SCHEDULE[12].visitTeam = this.PLAYOFF_SCHEDULE[8].homeTeam;
+          this.PLAYOFF_SCHEDULE[12].homeTeam = this.PLAYOFF_SCHEDULE[10].homeTeam;
+          if (this.PLAYOFF_SCHEDULE[8].visitScore > this.PLAYOFF_SCHEDULE[8].homeScore) {
+            // console.log('EAST div UPSET 1');
+            this.PLAYOFF_SCHEDULE[12].visitTeam = this.PLAYOFF_SCHEDULE[8].visitTeam;
+          }
+          if (this.PLAYOFF_SCHEDULE[10].visitScore > this.PLAYOFF_SCHEDULE[10].homeScore) {
+            // console.log('EAST div UPSET 2');
+            this.PLAYOFF_SCHEDULE[12].homeTeam = this.PLAYOFF_SCHEDULE[10].visitTeam;
+          }
         }
-        if (this.PLAYOFF_SCHEDULE[9].visitScore > this.PLAYOFF_SCHEDULE[9].homeScore) {
-          // console.log('WEST UPSET conf game');
-          this.PLAYOFF_SCHEDULE[10].homeTeam = this.PLAYOFF_SCHEDULE[9].visitTeam;
+        // Sort to have the correct home/visit
+        if (sortConference(this.teamService.getTeamByIndex(this.PLAYOFF_SCHEDULE[12].visitTeam),
+            this.teamService.getTeamByIndex(this.PLAYOFF_SCHEDULE[12].homeTeam)) === -1) {
+          // console.log('Swapping East div champs');
+          const temp = this.PLAYOFF_SCHEDULE[12].visitTeam;
+          this.PLAYOFF_SCHEDULE[12].visitTeam = this.PLAYOFF_SCHEDULE[12].homeTeam;
+          this.PLAYOFF_SCHEDULE[12].homeTeam = temp;
+        }
+        if ( (this.PLAYOFF_SCHEDULE[9].visitScore > this.PLAYOFF_SCHEDULE[9].homeScore)
+          && (this.PLAYOFF_SCHEDULE[11].visitScore > this.PLAYOFF_SCHEDULE[11].homeScore) ) {
+          // console.log('WEST both div UPSET');
+          this.PLAYOFF_SCHEDULE[13].visitTeam = this.PLAYOFF_SCHEDULE[9].visitTeam;
+          this.PLAYOFF_SCHEDULE[13].homeTeam = this.PLAYOFF_SCHEDULE[11].visitTeam;
         } else {
-          this.PLAYOFF_SCHEDULE[10].homeTeam = this.PLAYOFF_SCHEDULE[9].homeTeam;
+          // console.log('WEST NO UPSET?');
+          this.PLAYOFF_SCHEDULE[13].visitTeam = this.PLAYOFF_SCHEDULE[9].homeTeam;
+          this.PLAYOFF_SCHEDULE[13].homeTeam = this.PLAYOFF_SCHEDULE[11].homeTeam;
+          if (this.PLAYOFF_SCHEDULE[9].visitScore > this.PLAYOFF_SCHEDULE[9].homeScore) {
+            // console.log('WEST div UPSET 1');
+            this.PLAYOFF_SCHEDULE[13].visitTeam = this.PLAYOFF_SCHEDULE[9].visitTeam;
+          }
+          if (this.PLAYOFF_SCHEDULE[11].visitScore > this.PLAYOFF_SCHEDULE[11].homeScore) {
+            // console.log('WEST div UPSET 2');
+            this.PLAYOFF_SCHEDULE[13].homeTeam = this.PLAYOFF_SCHEDULE[11].visitTeam;
+          }
+        }
+        // Sort to have the correct home/visit
+        if (sortConference(this.teamService.getTeamByIndex(this.PLAYOFF_SCHEDULE[13].visitTeam),
+            this.teamService.getTeamByIndex(this.PLAYOFF_SCHEDULE[13].homeTeam)) === -1) {
+          // console.log('Swapping West div champs');
+          const temp = this.PLAYOFF_SCHEDULE[13].visitTeam;
+          this.PLAYOFF_SCHEDULE[13].visitTeam = this.PLAYOFF_SCHEDULE[13].homeTeam;
+          this.PLAYOFF_SCHEDULE[13].homeTeam = temp;
+        }
+      }
+      if (index === 3 && this.PLAYOFF_SCHEDULE[13].period === 'F') {
+        // console.log('[playoff.service] checkNextPlayoffRound() Stanley Cup, check Conference Round results');
+        if (this.PLAYOFF_SCHEDULE[12].visitScore > this.PLAYOFF_SCHEDULE[12].homeScore) {
+          // console.log('EAST UPSET conf game');
+          this.PLAYOFF_SCHEDULE[14].visitTeam = this.PLAYOFF_SCHEDULE[12].visitTeam;
+        } else {
+          this.PLAYOFF_SCHEDULE[14].visitTeam = this.PLAYOFF_SCHEDULE[12].homeTeam;
+        }
+        if (this.PLAYOFF_SCHEDULE[13].visitScore > this.PLAYOFF_SCHEDULE[13].homeScore) {
+          // console.log('WEST UPSET conf game');
+          this.PLAYOFF_SCHEDULE[14].homeTeam = this.PLAYOFF_SCHEDULE[13].visitTeam;
+        } else {
+          this.PLAYOFF_SCHEDULE[14].homeTeam = this.PLAYOFF_SCHEDULE[13].homeTeam;
+        }
+        // Sort to have the correct home/visit
+        if (sortNonConference(this.teamService.getTeamByIndex(this.PLAYOFF_SCHEDULE[14].visitTeam),
+            this.teamService.getTeamByIndex(this.PLAYOFF_SCHEDULE[14].homeTeam)) === -1) {
+          // console.log('Swapping conference champs');
+          const temp = this.PLAYOFF_SCHEDULE[14].visitTeam;
+          this.PLAYOFF_SCHEDULE[14].visitTeam = this.PLAYOFF_SCHEDULE[14].homeTeam;
+          this.PLAYOFF_SCHEDULE[14].homeTeam = temp;
         }
       }
     }
@@ -228,12 +304,6 @@ export class PlayoffService {
     // console.log('[playoff.service] getGamesForDay() searchTerm: ' + searchTerm);
     return this.PLAYOFF_SCHEDULE.filter(day => day.gameday === searchTerm);
   }
-
-  // hasGamesForDay(searchTerm: string): boolean {
-  //   let games: ISchedule[] = [];
-  //   games = this.PLAYOFF_SCHEDULE.filter(day => day.gameday === searchTerm);
-  //   return games.length > 0 ? true : false;
-  // }
 
   getGamesForTeam(team: number, postseason: boolean): Observable<ISchedule[]> {
     // console.log('[playoff.service] getGamesForTeam() team: ' + team);
@@ -256,12 +326,6 @@ export class PlayoffService {
 
   updatePlayoffBracket() {
     // console.log('[playoff.service] updatePlayoffBracket()');
-    const swapBracket = (t1, t2) => {
-      const temp = this.PlayoffBracket[t1];
-      this.PlayoffBracket[t1] = this.PlayoffBracket[t2];
-      this.PlayoffBracket[t2] = temp;
-    };
-
     this.PLAYOFF_SCHEDULE.forEach(game => {
       if (game.id === 0 && this.PlayoffTeams.length > 0) {
         // console.log('[playoff.service] updatePlayoffBracket() Initializing Bracket');
@@ -274,11 +338,14 @@ export class PlayoffService {
         this.PlayoffBracket[5] = this.PLAYOFF_SCHEDULE[2].homeTeam;
         this.PlayoffBracket[6] = this.PLAYOFF_SCHEDULE[3].visitTeam;
         this.PlayoffBracket[7] = this.PLAYOFF_SCHEDULE[3].homeTeam;
-
-        this.PlayoffBracket[9] = this.PlayoffTeams[0];
-        this.PlayoffBracket[11] = this.PlayoffTeams[6];
-        this.PlayoffBracket[13] = this.PlayoffTeams[1];
-        this.PlayoffBracket[15] = this.PlayoffTeams[7];
+        this.PlayoffBracket[8] = this.PLAYOFF_SCHEDULE[4].visitTeam;
+        this.PlayoffBracket[9] = this.PLAYOFF_SCHEDULE[4].homeTeam;
+        this.PlayoffBracket[10] = this.PLAYOFF_SCHEDULE[5].visitTeam;
+        this.PlayoffBracket[11] = this.PLAYOFF_SCHEDULE[5].homeTeam;
+        this.PlayoffBracket[12] = this.PLAYOFF_SCHEDULE[6].visitTeam;
+        this.PlayoffBracket[13] = this.PLAYOFF_SCHEDULE[6].homeTeam;
+        this.PlayoffBracket[14] = this.PLAYOFF_SCHEDULE[7].visitTeam;
+        this.PlayoffBracket[15] = this.PLAYOFF_SCHEDULE[7].homeTeam;
       }
 
       // console.log('[playoff.service] updatePlayoffBracket() game.id: ' + game.id);
@@ -288,83 +355,103 @@ export class PlayoffService {
       if (game.period === 'F') {
         if (game.id === 0) {
           if (game.homeScore > game.visitScore) {
-            this.PlayoffBracket[8] = game.homeTeam;
-          } else {
-            this.PlayoffBracket[8] = game.visitTeam;
-          }
-        }
-        if (game.id === 1) {
-          if (game.homeScore > game.visitScore) {
-            this.PlayoffBracket[10] = game.homeTeam;
-          } else {
-            this.PlayoffBracket[10] = game.visitTeam;
-          }
-        }
-        if (game.id === 2) {
-          if (game.homeScore > game.visitScore) {
-            this.PlayoffBracket[12] = game.homeTeam;
-          } else {
-            this.PlayoffBracket[12] = game.visitTeam;
-            // swapBracket(9, 13);
-            swapBracket(0, 4);
-            swapBracket(1, 5);
-            swapBracket(8, 12);
-          }
-        }
-        if (game.id === 3) {
-          if (game.homeScore > game.visitScore) {
-            this.PlayoffBracket[14] = game.homeTeam;
-          } else {
-            this.PlayoffBracket[14] = game.visitTeam;
-            // swapBracket(11, 15);
-            swapBracket(2, 6);
-            swapBracket(3, 7);
-            swapBracket(10, 14);
-          }
-        }
-        if (game.id === 4) {
-          if (game.homeScore > game.visitScore) {
             this.PlayoffBracket[16] = game.homeTeam;
           } else {
             this.PlayoffBracket[16] = game.visitTeam;
           }
         }
-        if (game.id === 5) {
-          if (game.homeScore > game.visitScore) {
-            this.PlayoffBracket[17] = game.homeTeam;
-          } else {
-            this.PlayoffBracket[17] = game.visitTeam;
-          }
-        }
-        if (game.id === 6) {
+        if (game.id === 1) {
           if (game.homeScore > game.visitScore) {
             this.PlayoffBracket[18] = game.homeTeam;
           } else {
             this.PlayoffBracket[18] = game.visitTeam;
           }
         }
-        if (game.id === 7) {
-          if (game.homeScore > game.visitScore) {
-            this.PlayoffBracket[19] = game.homeTeam;
-          } else {
-            this.PlayoffBracket[19] = game.visitTeam;
-          }
-        }
-        if (game.id === 8) {
+        if (game.id === 2) {
           if (game.homeScore > game.visitScore) {
             this.PlayoffBracket[20] = game.homeTeam;
           } else {
             this.PlayoffBracket[20] = game.visitTeam;
           }
         }
-        if (game.id === 9) {
+        if (game.id === 3) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[22] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[22] = game.visitTeam;
+          }
+        }
+        if (game.id === 4) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[17] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[17] = game.visitTeam;
+          }
+        }
+        if (game.id === 5) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[19] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[19] = game.visitTeam;
+          }
+        }
+        if (game.id === 6) {
           if (game.homeScore > game.visitScore) {
             this.PlayoffBracket[21] = game.homeTeam;
           } else {
             this.PlayoffBracket[21] = game.visitTeam;
           }
         }
+        if (game.id === 7) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[23] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[23] = game.visitTeam;
+          }
+        }
+        if (game.id === 8) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[24] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[24] = game.visitTeam;
+          }
+        }
+        if (game.id === 9) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[25] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[25] = game.visitTeam;
+          }
+        }
         if (game.id === 10) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[26] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[26] = game.visitTeam;
+          }
+        }
+        if (game.id === 11) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[27] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[27] = game.visitTeam;
+          }
+        }
+        if (game.id === 12) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[28] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[28] = game.visitTeam;
+          }
+        }
+        if (game.id === 13) {
+          if (game.homeScore > game.visitScore) {
+            this.PlayoffBracket[29] = game.homeTeam;
+          } else {
+            this.PlayoffBracket[29] = game.visitTeam;
+          }
+        }
+        if (game.id === 14) {
           if (game.homeScore > game.visitScore) {
             this.StanleyCupChamp = game.homeTeam;
           } else {
@@ -447,9 +534,6 @@ export class PlayoffService {
     }
   }
 
-
-
-
   getPlayoffTeams(): Observable<number[]> {
     const subject = new Subject<number[]>();
 
@@ -475,14 +559,15 @@ export class PlayoffService {
   }
 
   getEASTPlayoffTeams() {
-    if (this.WESTPlayoffTeams.length) {
+    if (this.EASTPlayoffTeams.length) {
       // console.log('[playoff.service] getEASTPlayoffTeams() EASTPlayoffTeams already BUILT');
     } else {
       // console.log('[playoff.service] getEASTPlayoffTeams() Need to build EASTPlayoffTeams');
       const divisions: string[] = [];
       let teamsArr: ITeam[] = [];
-      const EASTDivLeaders: ITeam [] = [];
-      const EASTOthers: ITeam [] = [];
+      let EASTMetro: ITeam [] = [];
+      let EASTAtlantic: ITeam [] = [];
+      let EASTOthers: ITeam [] = [];
 
       this.EASTPlayoffTeams = [];
 
@@ -497,27 +582,40 @@ export class PlayoffService {
         });
 
         divisions
-          .filter(division => division.indexOf('EAST') > -1 )
-          .forEach(division => {
+          .filter(division => division.indexOf('East') > -1 )
+          .forEach((division, i) => {
             const thisDiv: ITeam[] = teamsArr.filter(team => (team.division === division));
             thisDiv.sort(sortDivision);
-            EASTDivLeaders.push(thisDiv[0]);
-            EASTOthers.push(thisDiv[1]);
-            EASTOthers.push(thisDiv[2]);
-            EASTOthers.push(thisDiv[3]);
+            if (i === 0) {
+              EASTMetro = thisDiv.slice(0, 3);
+              EASTOthers = thisDiv.slice(3);
+            } else {
+              EASTAtlantic = thisDiv.slice(0, 3);
+              EASTOthers = EASTOthers.concat(thisDiv.slice(3));
+            }
           });
 
-        EASTDivLeaders.sort(sortConference);
         EASTOthers.sort(sortConference);
 
-        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTDivLeaders[0].abbrev));
-        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTDivLeaders[1].abbrev));
-        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTDivLeaders[2].abbrev));
-        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTDivLeaders[3].abbrev));
-        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTOthers[0].abbrev));
-        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTOthers[1].abbrev));
-        // console.table(this.EASTPlayoffTeams);
+        if (sortDivision(EASTMetro[0], EASTAtlantic[0]) === 1) {
+          // Atlantic is better, they get the #2 WC
+          EASTMetro.push(EASTOthers[0]);
+          EASTAtlantic.push(EASTOthers[1]);
+        } else {
+          // Metro is better, they get the #2 WC
+          EASTMetro.push(EASTOthers[1]);
+          EASTAtlantic.push(EASTOthers[0]);
+        }
 
+        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTMetro[0].abbrev));
+        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTMetro[1].abbrev));
+        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTMetro[2].abbrev));
+        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTMetro[3].abbrev));
+        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTAtlantic[0].abbrev));
+        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTAtlantic[1].abbrev));
+        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTAtlantic[2].abbrev));
+        this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTAtlantic[3].abbrev));
+        // console.table(this.EASTPlayoffTeams);
       });
     }
   }
@@ -529,8 +627,9 @@ export class PlayoffService {
       // console.log('[playoff.service] getWESTPlayoffTeams() Need to build WESTPlayoffTeams');
       const divisions: string[] = [];
       let teamsArr: ITeam[] = [];
-      const WESTDivLeaders: ITeam [] = [];
-      const WESTOthers: ITeam [] = [];
+      let WESTCentral: ITeam [] = [];
+      let WESTPacific: ITeam [] = [];
+      let WESTOthers: ITeam [] = [];
 
       this.WESTPlayoffTeams = [];
 
@@ -545,27 +644,40 @@ export class PlayoffService {
         });
 
         divisions
-          .filter(division => division.indexOf('WEST') > -1 )
-          .forEach(division => {
+          .filter(division => division.indexOf('West') > -1 )
+          .forEach((division, i) => {
             const thisDiv: ITeam[] = teamsArr.filter(team => (team.division === division));
             thisDiv.sort(sortDivision);
-            WESTDivLeaders.push(thisDiv[0]);
-            WESTOthers.push(thisDiv[1]);
-            WESTOthers.push(thisDiv[2]);
-            WESTOthers.push(thisDiv[3]);
+            if (i === 0) {
+              WESTCentral = thisDiv.slice(0, 3);
+              WESTOthers = thisDiv.slice(3);
+            } else {
+              WESTPacific = thisDiv.slice(0, 3);
+              WESTOthers = WESTOthers.concat(thisDiv.slice(3));
+            }
           });
 
-        WESTDivLeaders.sort(sortConference);
         WESTOthers.sort(sortConference);
 
-        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTDivLeaders[0].abbrev));
-        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTDivLeaders[1].abbrev));
-        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTDivLeaders[2].abbrev));
-        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTDivLeaders[3].abbrev));
-        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTOthers[0].abbrev));
-        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTOthers[1].abbrev));
-        // console.table(this.WESTPlayoffTeams);
+        if (sortDivision(WESTCentral[0], WESTPacific[0]) === 1) {
+          // Pacific is better, they get the #2 WC
+          WESTCentral.push(WESTOthers[0]);
+          WESTPacific.push(WESTOthers[1]);
+        } else {
+          // Central is better, they get the #2 WC
+          WESTCentral.push(WESTOthers[1]);
+          WESTPacific.push(WESTOthers[0]);
+        }
 
+        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTCentral[0].abbrev));
+        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTCentral[1].abbrev));
+        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTCentral[2].abbrev));
+        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTCentral[3].abbrev));
+        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTPacific[0].abbrev));
+        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTPacific[1].abbrev));
+        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTPacific[2].abbrev));
+        this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTPacific[3].abbrev));
+        // console.table(this.WESTPlayoffTeams);
       });
     }
   }

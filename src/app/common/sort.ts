@@ -163,3 +163,55 @@ export function sortConference(t1: ITeam, t2: ITeam): number {
     }
   }
 }
+
+export function sortNonConference(t1: ITeam, t2: ITeam): number {
+  if (t1.points < t2.points) {
+    return 1;
+  } else {
+    if (t1.points > t2.points) {
+      return -1;
+    } else {
+      if (t1.wins < t2.wins) {
+        return 1;
+      } else {
+        if (t1.wins > t2.wins) {
+          return -1;
+        } else {
+          if (t1.losses > t2.losses) {
+            return 1;
+          } else {
+            if (t1.losses < t2.losses) {
+              return -1;
+            } else {
+              if (t1.gf - t1.ga < t2.gf - t2.ga) {
+                return 1;
+              } else {
+                if (t1.gf - t1.ga > t2.gf - t2.ga) {
+                  return -1;
+                } else {
+                  if (t1.gf < t2.gf) {
+                    return 1;
+                  } else {
+                    if (t1.gf > t2.gf) {
+                      return -1;
+                    } else {
+                      if (t1.ga > t2.ga) {
+                        return 1;
+                      } else {
+                        if (t1.ga < t2.ga) {
+                          return -1;
+                        } else {
+                          return 0;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

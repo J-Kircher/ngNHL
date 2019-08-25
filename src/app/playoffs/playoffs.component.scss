@@ -52,11 +52,12 @@ mat-card {
         left: 0;
 
         .stanley-cup-trophy {
-          width: 172px;
+          width: 90px;
           height: 200px;
           background-image: url('/assets/images/StanleyCup.png');
           .stanley-cup-champ {
             margin-top: 50px;
+            width: 45%;
           }
         }
       }
@@ -68,7 +69,7 @@ mat-card {
 
       .wrapper {
         display: flex;
-        height: 522px;
+        height: 640px;
         justify-content: center;
 
         &.left {

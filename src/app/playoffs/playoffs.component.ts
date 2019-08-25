@@ -90,20 +90,6 @@ export class PlayoffsComponent implements OnInit, OnDestroy {
     return abbrev;
   }
 
-  // getAbbrev(id: number, hv: string) {
-  //   let abbrev = 'blank';
-
-  //   if (this.playoffGames[id]) {
-  //     if (hv === 'v') {
-  //       abbrev = this.teamsArr[this.playoffGames[id].visitTeam].abbrev;
-  //     } else {
-  //       abbrev = this.teamsArr[this.playoffGames[id].homeTeam].abbrev;
-  //     }
-  //   }
-
-  //   return abbrev;
-  // }
-
   showTeam(teamId: number) {
     const team = this.teamService.getTeamByIndex(teamId);
     return team.city + ' ' + team.name;
