@@ -4,7 +4,7 @@
       {{gameDay}}
     </div>
     <div fxLayout="row wrap" fxLayout.xs="column wrap"
-      [@listAnimations]="{ value: gamesArr.length, params: { stagger: '100ms' } }">
+      [@listAnimations]="{ value: gamesArr.length, params: { stagger: '50ms' } }">
       <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of gamesArr"
         (click)="getMatchup(score.id)">
         <mat-card class="gameday" matRipple appMaterialElevation>

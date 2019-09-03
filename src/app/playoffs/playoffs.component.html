@@ -204,7 +204,7 @@
                 {{day}}
               </div>
               <div fxLayout="row wrap" fxLayout.xs="column wrap"
-                [@listAnimations]="{ value: getGamesForDay(day).length, params: { stagger: '100ms' } }">
+                [@listAnimations]="{ value: getGamesForDay(day).length, params: { stagger: '50ms' } }">
                 <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let series of getSeriesForDay(day)"
                   (click)="getSeriesMatchup(series.id)">
                   <mat-card class="gameday" matRipple appMaterialElevation>
@@ -224,7 +224,7 @@
                 {{day}}
               </div>
               <div fxLayout="row wrap" fxLayout.xs="column wrap"
-                [@listAnimations]="{ value: getGamesForDay(day).length, params: { stagger: '100ms' } }">
+                [@listAnimations]="{ value: getGamesForDay(day).length, params: { stagger: '50ms' } }">
                 <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of getGamesForDay(day)"
                   (click)="getMatchup(score.id)">
                   <mat-card class="gameday" matRipple appMaterialElevation>
