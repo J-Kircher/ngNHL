@@ -4,7 +4,7 @@
       {{team.city}} {{team.name}} Schedule
     </div>
     <div fxLayout="row wrap" fxLayout.xs="column wrap"
-      [@listAnimations]="{ value: teamSchedule.length, params: { stagger: '100ms' } }">
+      [@listAnimations]="{ value: teamSchedule.length, params: { stagger: '50ms' } }">
       <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of teamSchedule"
         (click)="getMatchup(score.id)">
         <mat-card class="gameday" matRipple appMaterialElevation>
@@ -14,16 +14,23 @@
           <show-score [score]=score></show-score>
         </mat-card>
       </div>
-      <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of playoffSchedule"
-        (click)="getMatchup(score.id, true)">
-        <mat-card class="gameday" matRipple appMaterialElevation>
-          <div class="gameday-text">
-            {{score.gameday}}
-          </div>
-          <show-score [score]=score></show-score>
-        </mat-card>
-      </div>
     </div>
+  </div>
+  <div class="schedule" *ngFor="let day of GameDay">
+    <ng-container *ngIf="getGamesForDay(day).length">
+      <div class="schedule-text">
+        {{day}}
+      </div>
+      <div fxLayout="row wrap" fxLayout.xs="column wrap"
+        [@listAnimations]="{ value: getGamesForDay(day).length, params: { stagger: '50ms' } }">
+        <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of getGamesForDay(day)"
+          (click)="getMatchup(score.id, true)">
+          <mat-card class="gameday" matRipple appMaterialElevation>
+            <show-score [score]=score></show-score>
+          </mat-card>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </mat-card>
 

@@ -24,6 +24,7 @@ export class TeamScheduleComponent implements OnInit {
   postseason: boolean = false;
   playoffSchedule: ISchedule[];
   loading: boolean = true;
+  GameDay: string[] = [];
 
   dialogReturn: any;
 
@@ -57,7 +58,14 @@ export class TeamScheduleComponent implements OnInit {
           // console.log('[team-schedule] ngOnInit() getGamesForTeam() COMPLETE');
           this.playoffService.getGamesForTeam(this.teamIndex, this.postseason).subscribe((playSchedData: ISchedule[]) => {
             this.playoffSchedule = playSchedData;
-            // console.table(this.playoffSchedule);
+            let lastDay = '';
+            this.GameDay = [];
+            this.playoffSchedule.forEach(day => {
+              if (lastDay !== day.gameday) {
+                lastDay = day.gameday;
+                this.GameDay.push(day.gameday);
+              }
+            });
             this.loading = false;
           }, (err) => {
             console.error('[team-schedule] ngOnInit() playoff getGamesForTeam() error: ' + err);
@@ -86,6 +94,10 @@ export class TeamScheduleComponent implements OnInit {
     // showTeam(getOpponent(score).abbrev)
     // routing to the same component - TeamDetails needs to subscribe to the route paramaters;
     this.router.navigate(['/teams/' + abbrev]);
+  }
+
+  getGamesForDay(day: string) {
+    return this.playoffSchedule.filter(_ => _.gameday === day);
   }
 
   openResultsDialog(id: number, playoffs: boolean = false): void {
