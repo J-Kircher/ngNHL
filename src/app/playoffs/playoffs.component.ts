@@ -6,6 +6,7 @@ import { PlayoffService } from '../service/playoff.service';
 import { MatchupDialogComponent } from '../dialog/matchup/matchup-dialog.component';
 import { ResultsDialogComponent } from '../dialog/results/results-dialog.component';
 import { listAnimation } from '../shared/animations';
+import { PlayoffSeriesDialogComponent } from '../dialog/playoff-series/playoff-series-dialog.component';
 
 @Component({
   selector: 'playoffs',
@@ -41,7 +42,7 @@ export class PlayoffsComponent implements OnInit, OnDestroy {
     // Reset season needs to also reset playoffs!
     // this.teamsArr = this.teamService.getTeams().map(teams => teams);
 
-    this.tabIndex = 0; // Need to get this from input or something... and emit? the new value on destroy
+    this.tabIndex = this.playoffService.playoffTabIndex;
 
     this.teamService.getTeams().subscribe((data: ITeam[]) => {
       this.teamsArr = data;
@@ -74,11 +75,12 @@ export class PlayoffsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // { 'tabIndex': this.tabIndex });
-    console.log('[playoffs] ngOnDestroy() tabIndex: ' + this.tabIndex);
+    // console.log('[playoffs] ngOnDestroy() tabIndex: ' + this.tabIndex);
   }
 
   tabClicked(event: MatTabChangeEvent) {
     this.tabIndex = event.index;
+    this.playoffService.setPlayoffTabIndex(this.tabIndex);
   }
 
   getAbbrev(idx: number) {
@@ -97,6 +99,10 @@ export class PlayoffsComponent implements OnInit, OnDestroy {
 
   getGamesForDay(day: string) {
     return this.playoffService.getGamesForDay(day);
+  }
+
+  getSeriesForDay(day: string) {
+    return this.playoffService.getSeriesForDay(day);
   }
 
   openResultsDialog(id: number): void {
@@ -135,5 +141,29 @@ export class PlayoffsComponent implements OnInit, OnDestroy {
         this.openMatchupDialog(id);
       }
     });
+  }
+
+  openPlayoffSeriesDialog(id: number): void {
+    const dialogRef = this.dialog.open(PlayoffSeriesDialogComponent, {
+      data: { id: id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      this.dialogReturn = result;
+    }, (err) => {
+      console.error('[playoffs] openPlayoffSeriesDialog() afterClosed() error: ' + err);
+    });
+  }
+
+  getSeriesMatchup(id: number) {
+    // console.log('[playoffs] getSeriesMatchup: ' + id);
+    const series = this.playoffService.getSeriesById(id);
+    const games = [];
+    series.games.forEach(game => {
+      games.push(this.playoffService.getGameById(game));
+    });
+
+    this.openPlayoffSeriesDialog(id);
   }
 }

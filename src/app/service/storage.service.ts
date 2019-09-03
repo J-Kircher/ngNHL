@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ISchedule, ITeam } from '../model/nhl.model';
+import { ISchedule, ITeam, IPlayoffSeries } from '../model/nhl.model';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable()
@@ -111,13 +111,40 @@ export class StorageService {
     }
   }
 
-  public clearPlayoffScheduleFromStorage(): Observable<boolean> {
+  public clearPlayoffsFromStorage(): Observable<boolean> {
     const subject = new Subject<boolean>();
+    localStorage.removeItem('playoffSeries');
     localStorage.removeItem('playoffSchedule');
     setTimeout(() => {
       subject.next(true);
       subject.complete();
     }, 50);
     return subject;
+  }
+
+  public loadPlayoffSeriesFromLocalStorage(): IPlayoffSeries[] {
+    // console.log('[storage.service] loadPlayoffSeriesFromLocalStorage()');
+    let config;
+
+    try {
+      const configText = localStorage.getItem('playoffSeries');
+
+      if (configText) {
+        config = JSON.parse(configText);
+      }
+    } catch (e) {
+      console.warn('[storage.service] loadPlayoffSeriesFromLocalStorage() Error reading from local storage');
+    }
+    return config;
+  }
+
+  public storePlayoffSeriesToLocalStorage(newPlayoffSeries: IPlayoffSeries[]): void {
+    // console.log('[storage.service] storePlayoffSeriesToLocalStorage()');
+    try {
+      const configText = JSON.stringify(newPlayoffSeries);
+      localStorage.setItem('playoffSeries', configText);
+    } catch (e) {
+      console.warn('[storage.service] storePlayoffSeriesToLocalStorage() Error reading from local storage');
+    }
   }
 }

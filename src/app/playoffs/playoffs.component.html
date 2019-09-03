@@ -4,12 +4,6 @@
       Playoffs
     </div>
 
-    <!-- <div style="margin: 12px;">
-      <div *ngFor="let team of playoffTeams">
-        {{ showTeam(team) }}
-      </div>
-    </div> -->
-
     <mat-tab-group mat-stretch-tabs [(selectedIndex)]="tabIndex" (selectedTabChange)="tabClicked($event)">
       <mat-tab label="Bracket">
         <mat-card>
@@ -199,6 +193,26 @@
                 </div>
               </div>
             </div>
+          </div>
+        </mat-card>
+      </mat-tab>
+      <mat-tab label="Series">
+        <mat-card>
+          <div class="schedule" *ngFor="let day of GameDay">
+            <ng-container *ngIf="getGamesForDay(day).length">
+              <div class="gameday-text">
+                {{day}}
+              </div>
+              <div fxLayout="row wrap" fxLayout.xs="column wrap"
+                [@listAnimations]="{ value: getGamesForDay(day).length, params: { stagger: '100ms' } }">
+                <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let series of getSeriesForDay(day)"
+                  (click)="getSeriesMatchup(series.id)">
+                  <mat-card class="gameday" matRipple appMaterialElevation>
+                    <show-series [series]=series></show-series>
+                  </mat-card>
+                </div>
+              </div>
+            </ng-container>
           </div>
         </mat-card>
       </mat-tab>

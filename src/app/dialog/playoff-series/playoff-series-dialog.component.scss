@@ -1,0 +1,116 @@
+@import 'src/scss/common';
+
+.dialog-title {
+  margin-bottom: 12px;
+
+  .dialog-title-text {
+    @include boldText($lgFontSize);
+  }
+  button {
+    color: $NearWhite;
+    background-color: $NHLColor !important;
+  }
+}
+.gameday-text {
+  @include boldItalText($medFontSize);
+  margin: 6px;
+}
+
+mat-dialog-content {
+  min-width: 600px;
+
+  mat-card {
+    background-color: $NearWhite;
+
+    .playoff-series {
+      @include boldItalText($medFontSize);
+      .visit-level {
+        margin-top: 5px;
+        text-align: right;
+      }
+      .position-label {
+        text-align: center;
+      }
+      .home-level {
+        margin-top: 5px;
+        text-align: left;
+      }
+      .center {
+        text-align: center;
+      }
+      .team-city, .team-record {
+        @include normalText($medFontSize);
+      }
+      .team-name {
+        @include boldText($lgFontSize);
+      }
+      .spread {
+        @include normalText($medFontSize);
+      }
+      .normal {
+        @include normalText($medFontSize);
+        line-height: 38px;
+      }
+    }
+  }
+
+  .playoff-series-games {
+    @include normalText($lgFontSize);
+    .game {
+      cursor: pointer;
+      mat-icon {
+        min-height: 24px;
+      }
+      table {
+        border-collapse: collapse;
+        border-style: hidden;
+        td {
+          padding: 2px 4px;
+        }
+        .game-row {
+          &:hover {
+            border-color: $NHLColor;
+            background-color: $NHLTrans;
+          }
+          .check {
+            color: green;
+          }
+
+          .game-info {
+            white-space: nowrap;
+            &.visit {
+              text-align: left;
+            }
+            &.home {
+              text-align: right;
+            }
+
+            .logo {
+              height: 40px;
+            }
+            .team-city {
+              @include normalText($smFontSize);
+              padding-left: 5px;
+            }
+            .team-name {
+              @include boldText($medFontSize);
+              padding-left: 5px;
+            }
+          }
+          .score {
+            @include boldItalText($lgFontSize);
+            margin: 2px;
+            padding: 5px;
+          }
+          .dash {
+            @include normalText($smFontSize);
+          }
+        }
+      }
+    }
+    .seriesStatus {
+      @include boldText($medFontSize);
+      margin: 2px;
+    }
+  }
+}

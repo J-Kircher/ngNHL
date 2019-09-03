@@ -1,0 +1,197 @@
+<div class="dialog-title" fxLayoutAlign="space-between">
+  <div>
+    <div class="dialog-title-text">Series Matchup</div>
+    <div class="gameday-text">{{series.gameday}}</div>
+  </div>
+  <button mat-mini-fab mat-dialog-close><mat-icon>close</mat-icon></button>
+</div>
+<mat-dialog-content *ngIf="!loading">
+  <mat-card>
+    <mat-card-content>
+      <div class="playoff-series">
+        <div fxLayout="row">
+          <div fxFlex="40" class="visit-level">
+            <span class="team-city">{{teamsArr[series?.visitTeam]?.city}}</span><br>
+            <span class="team-name">{{teamsArr[series?.visitTeam]?.name}}</span>
+          </div>
+          <div fxFlex="20" class="center"><span class="normal"> at </span></div>
+          <div fxFlex="40" class="home-level">
+            <span class="team-city">{{teamsArr[series?.homeTeam]?.city}}</span><br>
+            <span class="team-name">{{teamsArr[series?.homeTeam]?.name}}</span>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-around end">
+          <div fxFlex="40" class="visit-level">
+            <span class="team-record">({{teamsArr[series?.visitTeam]?.wins}}-{{teamsArr[series?.visitTeam]?.losses}}-{{teamsArr[series?.visitTeam]?.otl}})</span>
+          </div>
+          <div fxFlex="20" class="center"><span class="spread">{{ getOdds() }}</span></div>
+          <div fxFlex="40" class="home-level">
+            <span class="team-record">({{teamsArr[series?.homeTeam]?.wins}}-{{teamsArr[series?.homeTeam]?.losses}}-{{teamsArr[series?.homeTeam]?.otl}})</span>
+          </div>
+        </div>
+        <div *ngIf="series?.visitTeam || series?.homeTeam">
+          <div fxFlex="40" class="visit-level">
+            <img src="/assets/images/{{teamsArr[series?.visitTeam]?.abbrev}}_LG.png" [alt]="teamsArr[series?.visitTeam]?.name">
+          </div>
+          <div fxFlex="20" class="center"></div>
+          <div fxFlex="40" class="home-level">
+            <img src="/assets/images/{{teamsArr[series?.homeTeam]?.abbrev}}_LG.png" [alt]="teamsArr[series?.homeTeam]?.name">
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxFlex="40" class="visit-level">
+            <div [style.width.px]="teamsArr[series?.visitTeam]?.of/9*200"
+              [ngStyle]="{'color':'#'+teamsArr[series?.visitTeam]?.darkcolor,
+                'background-color':'#'+teamsArr[series?.visitTeam]?.lightcolor,
+                'float':'right', 'padding-right':'5px'}">
+              {{teamsArr[series?.visitTeam]?.of}}
+            </div>
+          </div>
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">OF</div>
+          <div fxFlex="40" class="home-level">
+            <div [style.width.px]="teamsArr[series?.homeTeam]?.of/9*200"
+              [ngStyle]="{'color':'#'+teamsArr[series?.homeTeam]?.lightcolor,
+                'background-color':'#'+teamsArr[series?.homeTeam]?.darkcolor,
+                'float':'left', 'padding-left':'5px'}">
+              {{teamsArr[series?.homeTeam]?.of}}
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxFlex="40" class="visit-level">
+            <div [style.width.px]="teamsArr[series?.visitTeam]?.de/9*200"
+              [ngStyle]="{'color':'#'+teamsArr[series?.visitTeam]?.darkcolor,
+                'background-color':'#'+teamsArr[series?.visitTeam]?.lightcolor,
+                'float':'right', 'padding-right':'5px'}">
+              {{teamsArr[series?.visitTeam]?.de}}
+            </div>
+          </div>
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">DE</div>
+          <div fxFlex="40" class="home-level">
+            <div [style.width.px]="teamsArr[series?.homeTeam]?.de/9*200"
+              [ngStyle]="{'color':'#'+teamsArr[series?.homeTeam]?.lightcolor,
+                'background-color':'#'+teamsArr[series?.homeTeam]?.darkcolor,
+                'float':'left', 'padding-left':'5px'}">
+              {{teamsArr[series?.homeTeam]?.de}}
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxFlex="40" class="visit-level">
+            <div [style.width.px]="teamsArr[series?.visitTeam]?.pp/9*200"
+              [ngStyle]="{'color':'#'+teamsArr[series?.visitTeam]?.darkcolor,
+                'background-color':'#'+teamsArr[series?.visitTeam]?.lightcolor,
+                'float':'right', 'padding-right':'5px'}">
+              {{teamsArr[series?.visitTeam]?.pp}}
+            </div>
+          </div>
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">PP</div>
+          <div fxFlex="40" class="home-level">
+            <div [style.width.px]="teamsArr[series?.homeTeam]?.pp/9*200"
+              [ngStyle]="{'color':'#'+teamsArr[series?.homeTeam]?.lightcolor,
+                'background-color':'#'+teamsArr[series?.homeTeam]?.darkcolor,
+                'float':'left', 'padding-left':'5px'}">
+              {{teamsArr[series?.homeTeam]?.pp}}
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxFlex="40" class="visit-level">
+            <div [style.width.px]="teamsArr[series?.visitTeam]?.pk/9*200"
+              [ngStyle]="{'color':'#'+teamsArr[series?.visitTeam]?.darkcolor,
+                'background-color':'#'+teamsArr[series?.visitTeam]?.lightcolor,
+                'float':'right', 'padding-right':'5px'}">
+              {{teamsArr[series?.visitTeam]?.pk}}
+            </div>
+          </div>
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">PK</div>
+          <div fxFlex="40" class="home-level">
+            <div [style.width.px]="teamsArr[series?.homeTeam]?.pk/9*200"
+              [ngStyle]="{'color':'#'+teamsArr[series?.homeTeam]?.lightcolor,
+                'background-color':'#'+teamsArr[series?.homeTeam]?.darkcolor,
+                'float':'left', 'padding-left':'5px'}">
+              {{teamsArr[series?.homeTeam]?.pk}}
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxFlex="40" class="visit-level">
+            <div [style.width.px]="teamsArr[series?.visitTeam]?.go/9*200"
+              [ngStyle]="{'color':'#'+teamsArr[series?.visitTeam]?.darkcolor,
+                'background-color':'#'+teamsArr[series?.visitTeam]?.lightcolor,
+                'float':'right', 'padding-right':'5px'}">
+              {{teamsArr[series?.visitTeam]?.go}}
+            </div>
+          </div>
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">GO</div>
+          <div fxFlex="40" class="home-level">
+            <div [style.width.px]="teamsArr[series?.homeTeam]?.go/9*200"
+              [ngStyle]="{'color':'#'+teamsArr[series?.homeTeam]?.lightcolor,
+                'background-color':'#'+teamsArr[series?.homeTeam]?.darkcolor,
+                'float':'left', 'padding-left':'5px'}">
+              {{teamsArr[series?.homeTeam]?.go}}
+            </div>
+          </div>
+        </div>
+
+        <div fxLayout="row">
+          <div fxFlex="40" class="visit-level">
+            <div [style.width.px]="teamsArr[series?.visitTeam]?.co/9*200"
+              [ngStyle]="{'color':'#'+teamsArr[series?.visitTeam]?.darkcolor,
+                'background-color':'#'+teamsArr[series?.visitTeam]?.lightcolor,
+                'float':'right', 'padding-right':'5px'}">
+              {{teamsArr[series?.visitTeam]?.co}}
+            </div>
+          </div>
+          <div fxFlex="20" fxLayoutAlign="center end" class="position-label">CO</div>
+          <div fxFlex="40" class="home-level">
+            <div [style.width.px]="teamsArr[series?.homeTeam]?.co/9*200"
+              [ngStyle]="{'color':'#'+teamsArr[series?.homeTeam]?.lightcolor,
+                'background-color':'#'+teamsArr[series?.homeTeam]?.darkcolor,
+                'float':'left', 'padding-left':'5px'}">
+              {{teamsArr[series?.homeTeam]?.co}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div>
+    <div class="gameday-text">{{series.gameday}} Results</div>
+  </div>
+  <mat-card>
+    <mat-card-content>
+      <div class="playoff-series-games" fxLayout="column" fxLayoutAlign="center center">
+        <div class="game">
+          <table>
+            <tr class="game-row" *ngFor="let game of games, let i = index" (click)="getResults(game.id, (game.visitScore + game.homeScore))">
+              <td class="check"><mat-icon *ngIf="game.homeScore < game.visitScore">check_circle</mat-icon></td>
+              <td class="logo"><img src="/assets/images/{{teamsArr[game.visitTeam].abbrev}}.png"></td>
+              <td class="game-info visit">
+                <span class="team-city">{{teamsArr[game.visitTeam].city}}</span>
+                <br>
+                <span class="team-name">{{teamsArr[game.visitTeam].name}}</span>
+              </td>
+              <td class="score visit">{{game.visitScore}}</td>
+              <td class="dash">{{ (game.homeScore + game.visitScore > 0) ? '-' : 'at' }}</td>
+              <td class="score home">{{game.homeScore}}</td>
+              <td class="game-info home">
+                <span class="team-city">{{teamsArr[game.homeTeam].city}}</span>
+                <br>
+                <span class="team-name">{{teamsArr[game.homeTeam].name}}</span>
+              </td>
+              <td class="logo"><img src="/assets/images/{{teamsArr[game.homeTeam].abbrev}}.png"></td>
+              <td class="check"><mat-icon *ngIf="game.homeScore > game.visitScore">check_circle</mat-icon></td>
+            </tr>
+          </table>
+        </div>
+        <div class="seriesStatus">{{ showSeriesStatus() }}</div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</mat-dialog-content>

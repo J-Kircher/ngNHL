@@ -59,3 +59,15 @@ export interface IGameResults {
   period: string;
   goals: number;
 }
+
+export interface IPlayoffSeries {
+  id: number;
+  gameday: string;
+  visitTeam: number;
+  visitWins: number;
+  visitRecord?: string;
+  homeTeam: number;
+  homeWins: number;
+  homeRecord?: string;
+  games: number[];
+}

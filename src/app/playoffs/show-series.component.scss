@@ -1,0 +1,39 @@
+@import 'src/scss/common';
+
+mat-card {
+  margin: 8px 8px 0px;
+  padding: 8px;
+}
+
+.show-series {
+  .team-info {
+    padding: 1px;
+    white-space: nowrap;
+    text-align: left;
+    width: 100%;
+
+    .logo {
+      float: left;
+      height: 40px;
+    }
+    .series {
+      @include boldItalText($lgFontSize);
+      // background: rgba(255, 255, 255, 0.5);
+      margin: 2px;
+      padding: 5px;
+      float: right;
+    }
+    .team-city {
+      @include normalText($smFontSize);
+      padding-left: 5px;
+    }
+    .team-name {
+      @include boldText($medFontSize);
+      padding-left: 5px;
+    }
+  }
+  .seriesStatus {
+    // @include boldItalText($medFontSize);
+    @include normalText($smFontSize);
+  }
+}
