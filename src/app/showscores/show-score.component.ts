@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TeamService } from '../service/team.service';
+import { PlayoffService } from '../service/playoff.service';
 import { ITeam, ISchedule } from '../model/nhl.model';
-import { calculateOdds } from '../common/odds';
 
 @Component({
   selector: 'show-score',
@@ -13,10 +13,11 @@ export class ShowScoreComponent implements OnInit {
   @Input() score: ISchedule;
   teamsArr: ITeam[] = [];
   loading: boolean = true;
-  odds: number = 0;
+  seriesGameNo: number = 0;
 
   constructor(
-    private teamService: TeamService
+    private teamService: TeamService,
+    private playoffService: PlayoffService
   ) { }
 
   ngOnInit() {
@@ -27,7 +28,7 @@ export class ShowScoreComponent implements OnInit {
       this.teamsArr = data;
       // console.log('[show-score] ngOnInit() getTeams() SUCCESS');
       this.loading = false;
-      // this.odds = calculateOdds(this.teamsArr[this.score.visitTeam], this.teamsArr[this.score.homeTeam]);
+      this.seriesGameNo = this.playoffService.getSeriesGameIdxForPlayoffGame(this.score.id);
     }, (err) => {
       console.error('[show-score] ngOnInit() getTeams() error: ' + err);
     });
@@ -35,5 +36,10 @@ export class ShowScoreComponent implements OnInit {
 
   showPeriod() {
     return !['F', 'OT'].includes(this.score.period);
+  }
+
+  showPlayoffGame() {
+    const playoffRounds = [ 'First Round', 'Second Round', 'Conference Championship', 'Stanley Cup' ];
+    return playoffRounds.includes(this.score.gameday);
   }
 }

@@ -16,6 +16,9 @@
         <span class="team-name">{{teamsArr[score.homeTeam].name}}</span>
       </span>
     </div>
+    <div fxFlex="12px" *ngIf="showPlayoffGame()">
+      <span class="seriesGameNo">Game {{ seriesGameNo }}</span>
+    </div>
   </div>
   <div fxFlex="12px" *ngIf="showPeriod()">
     <span class="period">{{ score.period }}</span>

@@ -312,7 +312,6 @@ export class PlayoffService {
 
   getGamesForTeam(team: number, postseason: boolean): Observable<ISchedule[]> {
     // console.log('[playoff.service] getGamesForTeam() team: ' + team);
-
     const subject = new Subject<ISchedule[]>();
 
     if ((this.PLAYOFF_SCHEDULE.length < 1) && (postseason)) {
@@ -327,6 +326,29 @@ export class PlayoffService {
 
   getGameById(id: number): ISchedule {
     return this.PLAYOFF_SCHEDULE.find(game => game.id === id);
+  }
+
+  getGameResults(id: number): Observable<IGameResults[]> {
+    const subject = new Subject<IGameResults[]>();
+
+    setTimeout(() => {subject.next(this.PLAYOFF_SCHEDULE.find(game => (game.id === id)).gameResults); subject.complete(); }, 0);
+    return subject;
+  }
+
+  getSeriesIdxForPlayoffGame(playoffGame: number): number {
+    return this.PLAYOFF_SERIES.findIndex(series => {
+      const seriesIdx = series.games.findIndex(game => game === playoffGame);
+      return seriesIdx >= 0 ? true : false;
+    });
+  }
+
+  getSeriesGameIdxForPlayoffGame(playoffGame: number): number {
+    let gameNo = 0;
+    this.PLAYOFF_SERIES.find(_ => {
+      gameNo = _.games.findIndex(game => game === playoffGame);
+      return gameNo >= 0 ? true : false;
+    });
+    return ++gameNo;
   }
 
   updatePlayoffBracket() {
@@ -465,13 +487,6 @@ export class PlayoffService {
     this.setPlayoffBracket(this.PlayoffBracket);
   }
 
-  getGameResults(id: number): Observable<IGameResults[]> {
-    const subject = new Subject<IGameResults[]>();
-
-    setTimeout(() => {subject.next(this.PLAYOFF_SCHEDULE.find(game => (game.id === id)).gameResults); subject.complete(); }, 0);
-    return subject;
-  }
-
   playGame(game: ISchedule, simFast: boolean) {
     const currentGame = this.currentPlayoffGame;
     const visitTeam = this.teamService.getTeamByIndex(game.visitTeam);
@@ -490,7 +505,7 @@ export class PlayoffService {
       this.gameService.setGameActive(false);
       game.period = 'F';
 
-      const series: IPlayoffSeries = this.PLAYOFF_SERIES[this.getSeriesForPlayoffGame(currentGame)];
+      const series: IPlayoffSeries = this.PLAYOFF_SERIES[this.getSeriesIdxForPlayoffGame(currentGame)];
       const seriesGameNo = series.homeWins + series.visitWins;
       if (game.visitScore > game.homeScore) {
         if ([2, 3, 5].includes(seriesGameNo)) {
@@ -561,13 +576,6 @@ export class PlayoffService {
       this.setGameDay(this.GameDay);
       this.buildPlayoffSchedule(this.GameDay[0]);
     }
-  }
-
-  getSeriesForPlayoffGame(playoffGame: number): number {
-    return this.PLAYOFF_SERIES.findIndex((series, idx) => {
-      const seriesIdx = series.games.findIndex(game => game === playoffGame);
-      return seriesIdx >= 0 ? true : false;
-    });
   }
 
   getPlayoffTeams(): Observable<number[]> {
