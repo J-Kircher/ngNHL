@@ -133,13 +133,17 @@ export class PlayoffService {
   // Add a bool to swap home and visit for games 3, 4 and 6
   addToSchedule(series: IPlayoffSeries): number {
     // console.log('[playoff.service] addToSchedule() ' + series.gameday + ', ' + series.visitTeam + ' at ' + series.homeTeam);
+    const seriesGameNo = series.homeWins + series.visitWins;
+    // console.log('[playoff.service] addToSchedule() seriesGameNo: ' + seriesGameNo);
+    const vTeam = [2, 3, 5].includes(seriesGameNo) ? series.homeTeam : series.visitTeam;
+    const hTeam = [2, 3, 5].includes(seriesGameNo) ? series.visitTeam : series.homeTeam;
     const playoffGame = this.PLAYOFF_SCHEDULE.length;
     const nextPlayoffGame: ISchedule = {
       id: playoffGame,
       gameday: series.gameday,
-      visitTeam: series.visitTeam,
+      visitTeam: vTeam,
       visitScore: null,
-      homeTeam: series.homeTeam,
+      homeTeam: hTeam,
       homeScore: null,
       period: null,
       gameResults: []
@@ -487,12 +491,23 @@ export class PlayoffService {
       game.period = 'F';
 
       const series: IPlayoffSeries = this.PLAYOFF_SERIES[this.getSeriesForPlayoffGame(currentGame)];
+      const seriesGameNo = series.homeWins + series.visitWins;
       if (game.visitScore > game.homeScore) {
-        // console.log('[playoff.service] playGame() Visitors Win');
-        series.visitWins++;
+        if ([2, 3, 5].includes(seriesGameNo)) {
+          // console.log('[playoff.service] playGame() Favorite Wins');
+          series.homeWins++;
+        } else {
+          // console.log('[playoff.service] playGame() Underdog Wins');
+          series.visitWins++;
+        }
       } else {
-        // console.log('[playoff.service] playGame() Home Wins');
-        series.homeWins++;
+        if ([2, 3, 5].includes(seriesGameNo)) {
+          // console.log('[playoff.service] playGame() Underdog Wins');
+          series.visitWins++;
+        } else {
+          // console.log('[playoff.service] playGame() Favorite Wins');
+          series.homeWins++;
+        }
       }
 
       let seriesOver: boolean = false;
