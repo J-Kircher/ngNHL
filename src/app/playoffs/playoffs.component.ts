@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatTabChangeEvent } from '@angular/material';
 import { TeamService } from '../service/team.service';
 import { ITeam, ISchedule, IGameResults } from '../model/nhl.model';
@@ -15,7 +15,7 @@ import { PlayoffSeriesDialogComponent } from '../dialog/playoff-series/playoff-s
   animations: [listAnimation]
 })
 
-export class PlayoffsComponent implements OnInit, OnDestroy {
+export class PlayoffsComponent implements OnInit {
   tabIndex: number;
   divisions: string[] = [];
   teamsArr: ITeam[] = [];
@@ -71,11 +71,6 @@ export class PlayoffsComponent implements OnInit, OnDestroy {
     this.playoffService.GameDay$.subscribe(data => this.GameDay = data);
     this.playoffService.PlayoffBracket$.subscribe(data => this.PlayoffBracket = data);
     this.playoffService.StanleyCupChamp$.subscribe(data => this.StanleyCupChamp = data);
-  }
-
-  ngOnDestroy() {
-    // { 'tabIndex': this.tabIndex });
-    // console.log('[playoffs] ngOnDestroy() tabIndex: ' + this.tabIndex);
   }
 
   tabClicked(event: MatTabChangeEvent) {
