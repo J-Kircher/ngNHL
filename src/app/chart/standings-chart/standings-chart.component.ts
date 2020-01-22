@@ -185,7 +185,7 @@ export class StandingsChartComponent implements OnInit {
 
     // calculate average
     const totPts = this.chartStats.reduce((a, b) => a + (b['points'] || 0), 0);
-    const avg = totPts / this.chartStats.length;
+    const avg = Math.round((totPts / this.chartStats.length) * 10) / 10;
 
     // Average Line
     _data.push({
