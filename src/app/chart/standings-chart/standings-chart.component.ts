@@ -70,8 +70,6 @@ export class StandingsChartComponent implements OnInit {
       this.myChart.chart.destroy();
     }
 
-    // Add overtime bool to ISchedule
-
     this.teamsArr.forEach(team => {
       if (team.division === chartDivision || chartDivision === 'all') {
 
@@ -84,23 +82,23 @@ export class StandingsChartComponent implements OnInit {
           if (game.period === 'F') {
             if (teamIndex === game.homeTeam) {
               if (game.homeScore > game.visitScore) {
+                  teamPoints += 2;
+              } else {
                 if (game.overtime) {
                   teamPoints += 1;
-                } else {
-                  teamPoints += 2;
                 }
               }
             } else {
               if (game.visitScore > game.homeScore) {
+                  teamPoints += 2;
+              } else {
                 if (game.overtime) {
                   teamPoints += 1;
-                } else {
-                  teamPoints += 2;
                 }
               }
             }
             // teamStats.push({ 'points': teamPoints, 'games': (idx + 1) });
-            teamStats.push(teamPoints);
+            // teamStats.push(teamPoints);
           }
         });
 
@@ -118,7 +116,7 @@ export class StandingsChartComponent implements OnInit {
       }
     });
 
-    // console.log(this.chartStats);
+    console.log(this.chartStats);
 
     // Create chart object
     const canvas = <HTMLCanvasElement>document.getElementById('myCanvas');
