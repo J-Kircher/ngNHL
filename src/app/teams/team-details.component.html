@@ -42,14 +42,18 @@
   <mat-card class="team-card">
     <table width="100%">
       <tr [ngStyle]="{'background-color':'#'+team.lightcolor}">
-        <td width="25%">Wins</td>
-        <td width="25%">Losses</td>
-        <td width="25%">GF</td>
-        <td width="25%">GA</td>
+        <td>Wins</td>
+        <td>Losses</td>
+        <td>OTL</td>
+        <td>Points</td>
+        <td>GF</td>
+        <td>GA</td>
       </tr>
       <tr [ngStyle]="{'color':'white','background-color':'#'+team.darkcolor}">
         <td>{{team.wins}}</td>
         <td>{{team.losses}}</td>
+        <td>{{team.otl}}</td>
+        <td>{{team.points}}</td>
         <td>{{team.gf}}</td>
         <td>{{team.ga}}</td>
       </tr>
