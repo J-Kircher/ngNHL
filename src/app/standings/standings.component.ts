@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TeamService } from '../service/team.service';
-import { ITeam } from '../model/nhl.model';
+import { MatDialog } from '@angular/material';
+import { TeamService } from '@app/service/team.service';
+import { ITeam } from '@app/model/nhl.model';
+import { StandingsDialogComponent } from '@app/dialog/standings/standings-dialog.component';
 
 @Component({
   selector: 'standings',
@@ -12,8 +14,12 @@ export class StandingsComponent implements OnInit {
   divisions: string[] = [];
   teamsArr: ITeam[] = [];
   loading: boolean = true;
+  dialogReturn: any;
 
-  constructor(private teamService: TeamService) { }
+  constructor(
+    public dialog: MatDialog,
+    private teamService: TeamService
+  ) { }
 
   ngOnInit() {
     // console.log('[standings] ngOnInit()');
@@ -37,5 +43,21 @@ export class StandingsComponent implements OnInit {
     }, (err) => {
       console.error('[standings] ngOnInit() getTeams() error: ' + err);
     });
+  }
+
+  openStatsDialog(): void {
+    const dialogRef = this.dialog.open(StandingsDialogComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      this.dialogReturn = result;
+    });
+  }
+
+  openStats() {
+    // this.childModal.show();
+    this.openStatsDialog();
   }
 }

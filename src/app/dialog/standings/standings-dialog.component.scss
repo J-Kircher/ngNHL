@@ -1,0 +1,17 @@
+@import 'src/scss/common';
+
+.dialog-title {
+  margin-bottom: 12px;
+
+  .dialog-title-text {
+    @include boldText($lgFontSize);
+  }
+  button {
+    color: $NearWhite;
+    background-color: $NHLColor !important;
+  }
+}
+
+mat-dialog-content {
+  min-width: 60vw;
+}

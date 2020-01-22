@@ -37,6 +37,9 @@ import { SpinnerButtonDirective } from './shared/spinner-button.directive';
 import { MatSpinner } from '@angular/material';
 import { ShowSeriesComponent } from './playoffs/show-series.component';
 import { PlayoffSeriesDialogComponent } from './dialog/playoff-series/playoff-series-dialog.component';
+import { CapitalizePipe } from './common/capitalize.pipe';
+import { StandingsDialogComponent } from './dialog/standings/standings-dialog.component';
+import { StandingsChartComponent } from './chart/standings-chart/standings-chart.component';
 
 // Loads application runtime config
 export const appInitializerFn = (appConfig: ConfigService) => {
@@ -60,6 +63,7 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     SimseasonDialogComponent,
     ResultsDialogComponent,
     PlayoffSeriesDialogComponent,
+    StandingsDialogComponent,
     MatSpinner
   ],
   declarations: [
@@ -85,7 +89,10 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     MaterialElevationDirective,
     SpinnerButtonDirective,
     ShowSeriesComponent,
-    PlayoffSeriesDialogComponent
+    PlayoffSeriesDialogComponent,
+    CapitalizePipe,
+    StandingsDialogComponent,
+    StandingsChartComponent
   ],
   providers: [
     TeamService,

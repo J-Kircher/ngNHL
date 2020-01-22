@@ -1,0 +1,9 @@
+<div class="dialog-title" fxLayoutAlign="space-between">
+  <div>
+    <div class="dialog-title-text">Standings Chart</div>
+  </div>
+  <button mat-mini-fab mat-dialog-close><mat-icon>close</mat-icon></button>
+</div>
+<mat-dialog-content *ngIf="!loading">
+  <app-standings-chart></app-standings-chart>
+</mat-dialog-content>

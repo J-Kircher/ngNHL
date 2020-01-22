@@ -7,6 +7,10 @@ mat-card {
   .standings-text {
     @include boldItalText($lgFontSize);
     margin-top: 5px;
+    button {
+      padding: 0px;
+      min-width: 36px;
+    }
   }
 
   mat-tab-group {

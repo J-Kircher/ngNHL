@@ -1,0 +1,10 @@
+<div class="chart-container" fxLayout="column">
+  <div>{{ chartView | capitalize }}</div>
+  <canvas id="myCanvas"></canvas>
+  <div fxLayoutAlign="center">
+    <mat-button-toggle-group name="chartStyle" aria-label="Chart Style">
+      <mat-button-toggle value="All" (click)="createChartObject('all')">All</mat-button-toggle>
+      <mat-button-toggle *ngFor="let division of divisions" value="{{division}}" (click)="createChartObject(division)">{{division}}</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>
