@@ -98,7 +98,7 @@ export class StandingsChartComponent implements OnInit {
               }
             }
             // teamStats.push({ 'points': teamPoints, 'games': (idx + 1) });
-            // teamStats.push(teamPoints);
+            teamStats.push(teamPoints);
           }
         });
 
@@ -116,7 +116,7 @@ export class StandingsChartComponent implements OnInit {
       }
     });
 
-    console.log(this.chartStats);
+    // console.log(this.chartStats);
 
     // Create chart object
     const canvas = <HTMLCanvasElement>document.getElementById('myCanvas');
