@@ -178,6 +178,7 @@ export class ScheduleService {
       // console.log('[schedule.service] playGame() GAME OVER');
       this.gameService.setGameActive(false);
       const overtime = game.period === 'OT';
+      game.overtime = overtime;
       game.period = 'F';
 
       // Update in case sim season timing slightly updates the records

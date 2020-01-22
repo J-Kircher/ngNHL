@@ -503,6 +503,8 @@ export class PlayoffService {
     }, () => {
       // console.log('[playoff.service] playGame() playNHLGame over');
       this.gameService.setGameActive(false);
+      const overtime = game.period === 'OT';
+      game.overtime = overtime;
       game.period = 'F';
 
       const series: IPlayoffSeries = this.PLAYOFF_SERIES[this.getSeriesIdxForPlayoffGame(currentGame)];
