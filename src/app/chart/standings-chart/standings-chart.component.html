@@ -1,8 +1,12 @@
 <div class="chart-container" fxLayout="column">
-  <div>{{ chartView | capitalize }}</div>
+  <div>{{ chartDivision | capitalize }}</div>
   <canvas id="myCanvas"></canvas>
-  <div fxLayoutAlign="center">
-    <mat-button-toggle-group name="chartStyle" aria-label="Chart Style">
+  <div fxLayoutAlign="space-evenly">
+    <div fxLayoutAlign="space-around center">
+      <span style="padding-right: 12px;">Total</span>
+      <mat-slide-toggle [(ngModel)]="chartStyle" (change)="createChartObject()">Net</mat-slide-toggle>
+    </div>
+    <mat-button-toggle-group name="chartDivision" aria-label="Divisions" class="slim">
       <mat-button-toggle value="All" (click)="createChartObject('all')">All</mat-button-toggle>
       <mat-button-toggle *ngFor="let division of divisions" value="{{division}}" (click)="createChartObject(division)">{{division}}</mat-button-toggle>
     </mat-button-toggle-group>

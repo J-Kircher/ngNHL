@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from '@app/service/team.service';
 import { ScheduleService } from '@app/service/schedule.service';
-import { ITeam, ISchedule, IGameResults } from '@app/model/nhl.model';
+import { ITeam, ISchedule } from '@app/model/nhl.model';
 import { Chart } from 'chart.js';
-import { max } from 'rxjs/operators';
 
 @Component({
   selector: 'app-standings-chart',
@@ -11,17 +10,22 @@ import { max } from 'rxjs/operators';
   styleUrls: ['./standings-chart.component.scss']
 })
 export class StandingsChartComponent implements OnInit {
-  chartView: string = '';
+  chartDivision: string = '';
   divisions: string[] = [];
   teamsArr: ITeam[] = [];
   schedulesArr: ISchedule[][] = [];
-  myChart: Chart = []; // This will hold our chart info
+  myChart: Chart = []; // This will hold the chart info
   chartStats = []; // This will contain the labels and data for the chart
+  chartStyle: boolean = true; // true: avgPPG, false: avgTeamPts
+  avgPPG: number = 0;
+  avgTeamPts: number = 0;
 
   constructor(
     private teamService: TeamService,
     private scheduleService: ScheduleService
   ) { }
+
+  // TODO: custom tooltip, maybe add logo
 
   ngOnInit() {
     // console.log('[standings-chart] ngOnInit()');
@@ -59,8 +63,13 @@ export class StandingsChartComponent implements OnInit {
   }
 
   createChartObject(chartDivision: string): void {
-    // console.log('[standings-chart] createChartObject()');
-    this.chartView = chartDivision;
+    // console.log('[standings-chart] createChartObject() chartDivision: ' + chartDivision);
+
+    if (chartDivision == null) {
+      // Slide toggle clicked
+      chartDivision = this.chartDivision || 'all';
+    }
+    this.chartDivision = chartDivision;
 
     let teamIndex: number;
 
@@ -70,10 +79,13 @@ export class StandingsChartComponent implements OnInit {
       this.myChart.chart.destroy();
     }
 
+    const avgPPG = this.getAverage('ppg', this.chartDivision);
+
     this.teamsArr.forEach(team => {
-      if (team.division === chartDivision || chartDivision === 'all') {
+      if (team.division === this.chartDivision || this.chartDivision === 'all') {
 
         const teamStats = [];
+        teamStats.push(0); // To allow x axis to start at 0
         teamIndex = this.teamsArr.findIndex(t => t.abbrev === team.abbrev);
 
         let teamPoints = 0;
@@ -97,7 +109,9 @@ export class StandingsChartComponent implements OnInit {
                 }
               }
             }
-            // teamStats.push({ 'points': teamPoints, 'games': (idx + 1) });
+            if (this.chartStyle) {
+              teamPoints = Math.round((teamPoints -= avgPPG) * 100) / 100;
+            }
             teamStats.push(teamPoints);
           }
         });
@@ -179,18 +193,21 @@ export class StandingsChartComponent implements OnInit {
 
     this.chartStats.forEach(item => {
       if (item.data.length >= _maxGames) {
-        _label = item.data.map((_n, idx) => idx + 1);
+        _label = item.data.map((_n, idx) => idx);
       }
     });
 
-    // calculate average
-    const totPts = this.chartStats.reduce((a, b) => a + (b['points'] || 0), 0);
-    const avg = Math.round((totPts / this.chartStats.length) * 10) / 10;
+    let chartAvg;
+    if (this.chartStyle) {
+      chartAvg = this.getAverage('ppg', this.chartDivision);
+    } else {
+      chartAvg = this.getAverage('teamPts', this.chartDivision);
+    }
 
     // Average Line
     _data.push({
       label: 'Average',
-      data: Array.apply(null, new Array(_maxGames)).map(Number.prototype.valueOf, avg),
+      data: Array.apply(null, new Array(_maxGames)).map(Number.prototype.valueOf, chartAvg),
       fill: false,
       radius: 0,
       backgroundColor: 'rgba(0,0,0,0.1)'
@@ -200,5 +217,24 @@ export class StandingsChartComponent implements OnInit {
       labels: _label,
       datasets: _data
     };
+  }
+
+  getAverage(type: string, division?: string): number {
+    // console.log('standings-chart] getAverage() type: ' + type);
+
+    if (type === 'ppg') {
+      const totPts = this.teamsArr
+        .filter(team => division === 'all' || team.division === division)
+        .reduce((a, b) => (a + (b['points'] || 0)), 0);
+      const totGames = this.teamsArr
+        .filter(team => division === 'all' || team.division === division)
+        .reduce((a, b) => (a + (b['wins'] || 0) + (b['losses'] || 0) + (b['otl'] || 0)), 0);
+      this.avgPPG = Math.round((totPts / totGames) * 100) / 100;
+      return this.avgPPG;
+    } else {
+      const totPts = this.chartStats.reduce((a, b) => a + (b['points'] || 0), 0);
+      this.avgTeamPts = Math.round((totPts / this.chartStats.length) * 10) / 10;
+      return this.avgTeamPts;
+    }
   }
 }

@@ -47,7 +47,8 @@ export class StandingsComponent implements OnInit {
 
   openStatsDialog(): void {
     const dialogRef = this.dialog.open(StandingsDialogComponent, {
-      data: {}
+      data: {},
+      panelClass: 'slim'
     });
 
     dialogRef.afterClosed().subscribe(result => {
