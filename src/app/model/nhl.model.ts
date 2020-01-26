@@ -4,6 +4,7 @@ export interface ITeam {
     abbrev: string;
     lightcolor: string;
     darkcolor: string;
+    chartcolor: string;
     division: string;
     of: number;
     de: number;

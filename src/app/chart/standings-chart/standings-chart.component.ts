@@ -124,8 +124,8 @@ export class StandingsChartComponent implements OnInit {
           borderWidth: 3,
           pointRadius: 0,
           fill: false,
-          borderColor: '#' + team.darkcolor,
-          backgroundColor: '#' + team.lightcolor
+          borderColor: '#' + team.chartcolor,
+          backgroundColor: '#' + team.chartcolor
         });
       }
     });
