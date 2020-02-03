@@ -129,8 +129,6 @@ export class PlayoffService {
     }
   }
 
-  // TODO
-  // Add a bool to swap home and visit for games 3, 4 and 6
   addToSchedule(series: IPlayoffSeries): number {
     // console.log('[playoff.service] addToSchedule() ' + series.gameday + ', ' + series.visitTeam + ' at ' + series.homeTeam);
     const seriesGameNo = series.homeWins + series.visitWins;
