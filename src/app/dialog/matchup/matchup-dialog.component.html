@@ -29,7 +29,7 @@
             <span class="team-record">({{teamsArr[modalGame?.homeTeam]?.wins}}-{{teamsArr[modalGame?.homeTeam]?.losses}}-{{teamsArr[modalGame?.homeTeam]?.otl}})</span>
           </div>
         </div>
-        <div *ngIf="modalGame?.visitTeam || modalGame?.homeTeam">
+        <div *ngIf="modalGame?.visitTeam || modalGame?.homeTeam" fxLayoutAlign=" center">
           <div fxFlex="40" class="visit-level">
             <img src="/assets/images/{{teamsArr[modalGame?.visitTeam]?.abbrev}}_LG.png" [alt]="teamsArr[modalGame?.visitTeam]?.name">
           </div>
