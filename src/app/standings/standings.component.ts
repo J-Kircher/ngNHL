@@ -26,8 +26,6 @@ export class StandingsComponent implements OnInit {
 
     // this.teamsArr = this.teamService.getTeams().map(teams => teams);
 
-    // this.divisions = ['AFC West', 'NFC West', 'AFC South', 'NFC South', 'AFC North', 'NFC North', 'AFC East', 'NFC East'];
-
     this.teamService.getTeams().subscribe((data: ITeam[]) => {
       this.teamsArr = data;
       // console.log('[standings] ngOnInit() getTeams() SUCCESS');
