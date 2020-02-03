@@ -33,7 +33,7 @@ export class PlayNHLGame {
           case 9: case 10: case 11: period = 'OT'; break;
           default: return 'U';
         }
-        const score: number = self.generateNHLScore(self, game, vTeam, hTeam, i, period);
+        const score: number = self.generateNHLScore(self, vTeam, hTeam, i);
         // console.log('[PlayNHLGame] playNHLGame() score: ' + score);
 
         game.period = period;
@@ -74,29 +74,28 @@ export class PlayNHLGame {
   }
 
   // Called internally by playNHLGame
-  static generateNHLScore(self: any, game: ISchedule, vTeam: ITeam, hTeam: ITeam, gameCounter: number, period: string): number {
+  static generateNHLScore(self: any, vTeam: ITeam, hTeam: ITeam, gameCounter: number): number {
     // console.log('[PlayNHLGame] generateNHLScore() gameCounter: ' + gameCounter);
 
     switch (gameCounter) {
-      case 0: return this.determineScore (self, game.homeScore, hTeam.of, game.visitScore, vTeam.de, period);
-      case 1: return this.determineScore (self, game.homeScore, hTeam.de, game.visitScore, vTeam.of, period);
-      case 2: return this.determineScore (self, game.homeScore, hTeam.pp, game.visitScore, vTeam.pk, period);
-      case 3: return this.determineScore (self, game.homeScore, hTeam.pk, game.visitScore, vTeam.pp, period);
-      case 4: return this.determineScore (self, game.homeScore, hTeam.go, game.visitScore, vTeam.go, period);
-      case 5: return this.determineScore (self, game.homeScore, hTeam.of, game.visitScore, vTeam.de, period);
-      case 6: return this.determineScore (self, game.homeScore, hTeam.de, game.visitScore, vTeam.of, period);
-      case 7: return this.determineScore (self, game.homeScore, hTeam.pp, game.visitScore, vTeam.pk, period);
-      case 8: return this.determineScore (self, game.homeScore, hTeam.go, game.visitScore, vTeam.go, period);
-      case 9: return this.determineScore (self, game.homeScore, hTeam.go, game.visitScore, vTeam.go, period);
-      case 10: return this.determineScore (self, game.homeScore, hTeam.co, game.visitScore, vTeam.co, period);
+      case 0: return this.determineScore (self, hTeam.of, vTeam.de);
+      case 1: return this.determineScore (self, hTeam.de, vTeam.of);
+      case 2: return this.determineScore (self, hTeam.pp, vTeam.pk);
+      case 3: return this.determineScore (self, hTeam.pk, vTeam.pp);
+      case 4: return this.determineScore (self, hTeam.go, vTeam.go);
+      case 5: return this.determineScore (self, hTeam.of, vTeam.de);
+      case 6: return this.determineScore (self, hTeam.de, vTeam.of);
+      case 7: return this.determineScore (self, hTeam.pp, vTeam.pk);
+      case 8: return this.determineScore (self, hTeam.go, vTeam.go);
+      case 9: return this.determineScore (self, hTeam.go, vTeam.go);
+      case 10: return this.determineScore (self, hTeam.co, vTeam.co);
       case 11: return 1;
       default: console.log('generateNHLScore() Error - Invalid gameCounter: ' + gameCounter);
     }
   }
 
   // Called internally by generateNHLScore
-  static determineScore(self: any, homeScore: number, homeAttrib: number,
-      visitScore: number, visitAttrib: number, period: string): number {
+  static determineScore(self: any, homeAttrib: number, visitAttrib: number): number {
 
     let difference = 0;
 
