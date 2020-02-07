@@ -31,11 +31,11 @@
         </div>
         <div *ngIf="series?.visitTeam || series?.homeTeam">
           <div fxFlex="40" class="visit-level">
-            <img src="/assets/images/{{teamsArr[series?.visitTeam]?.abbrev}}_LG.png" [alt]="teamsArr[series?.visitTeam]?.name">
+            <img src="/assets/images/{{teamsArr[series?.visitTeam]?.abbrev}}_LG.png" height="100px" [alt]="teamsArr[series?.visitTeam]?.name">
           </div>
           <div fxFlex="20" class="center"></div>
           <div fxFlex="40" class="home-level">
-            <img src="/assets/images/{{teamsArr[series?.homeTeam]?.abbrev}}_LG.png" [alt]="teamsArr[series?.homeTeam]?.name">
+            <img src="/assets/images/{{teamsArr[series?.homeTeam]?.abbrev}}_LG.png" height="100px" [alt]="teamsArr[series?.homeTeam]?.name">
           </div>
         </div>
 
