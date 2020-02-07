@@ -218,21 +218,23 @@
       </mat-tab>
       <mat-tab label="Schedule">
         <mat-card>
-          <div class="schedule" *ngFor="let day of GameDay">
-            <ng-container *ngIf="getGamesForDay(day).length">
-              <div class="gameday-text">
-                {{day}}
-              </div>
-              <div fxLayout="row wrap" fxLayout.xs="column wrap"
-                [@listAnimations]="{ value: getGamesForDay(day).length, params: { stagger: '50ms' } }">
-                <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of getGamesForDay(day)"
-                  (click)="getMatchup(score.id)">
-                  <mat-card class="gameday" matRipple appMaterialElevation>
-                    <show-score [score]=score></show-score>
-                  </mat-card>
+          <div class="full-schedule">
+            <div class="schedule" *ngFor="let day of GameDay">
+              <ng-container *ngIf="getGamesForDay(day).length">
+                <div class="gameday-text">
+                  {{day}}
                 </div>
-              </div>
-            </ng-container>
+                <div fxLayout="row wrap" fxLayout.xs="column wrap"
+                  [@listAnimations]="{ value: getGamesForDay(day).length, params: { stagger: '50ms' } }">
+                  <div fxFlex.gt-xs="50%" fxFlex.gt-md="25%" *ngFor="let score of getGamesForDay(day)"
+                    (click)="getMatchup(score.id)">
+                    <mat-card class="gameday" matRipple appMaterialElevation>
+                      <show-score [score]=score></show-score>
+                    </mat-card>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
           </div>
         </mat-card>
       </mat-tab>

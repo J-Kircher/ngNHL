@@ -20,6 +20,11 @@ mat-card {
     border-radius: 5px;
     padding: 5px;
 
+    .full-schedule {
+      max-height: 652px; // Almost 3 rows
+      overflow-y: auto;
+    }
+
     .schedule {
       .gameday-text {
         @include boldItalText($medFontSize);
