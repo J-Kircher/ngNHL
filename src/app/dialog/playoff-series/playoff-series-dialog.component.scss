@@ -58,9 +58,6 @@ mat-dialog-content {
       .team-name {
         @include boldText($lgFontSize);
       }
-      .spread {
-        @include normalText($medFontSize);
-      }
       .normal {
         @include normalText($medFontSize);
         line-height: 38px;

@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { TeamService } from '../../service/team.service';
 import { ITeam, ISchedule, IPlayoffSeries } from '../../model/nhl.model';
 import { PlayoffService } from '../../service/playoff.service';
-import { calculateOdds, getOddsText } from '../../common/odds';
 import { ResultsDialogComponent } from '../results/results-dialog.component';
 import { MatchupDialogComponent } from '../matchup/matchup-dialog.component';
 
@@ -41,16 +40,9 @@ export class PlayoffSeriesDialogComponent implements OnInit {
         this.teamsArr = data;
         // console.log('[playoff-series] ngOnInit() getTeams() SUCCESS');
         this.loading = false;
-        this.odds = calculateOdds(this.teamsArr[this.series.visitTeam], this.teamsArr[this.series.homeTeam]);
       }, (err) => {
         console.error('[playoff-series] ngOnInit() getTeams() error: ' + err);
       });
-    }
-
-    getOdds() {
-      const visit = this.teamsArr[this.series.visitTeam] ? this.teamsArr[this.series.visitTeam].abbrev : '';
-      const home = this.teamsArr[this.series.homeTeam] ? this.teamsArr[this.series.homeTeam].abbrev : '';
-      return getOddsText(this.odds, visit, home);
     }
 
     showSeriesStatus() {
