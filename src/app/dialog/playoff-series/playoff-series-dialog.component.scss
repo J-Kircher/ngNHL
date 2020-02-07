@@ -56,8 +56,12 @@ mat-dialog-content {
 
   .playoff-series-games {
     @include normalText($lgFontSize);
+
     .game {
       cursor: pointer;
+      max-height: 230px; // Fits 4 game results
+      overflow-y: auto;
+
       mat-icon {
         min-height: 24px;
       }
