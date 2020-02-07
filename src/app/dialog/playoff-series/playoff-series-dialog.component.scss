@@ -27,6 +27,13 @@ mat-dialog-content {
       .visit-level {
         margin-top: 5px;
         text-align: right;
+        .img-wrapper {
+          height: 100px;
+          img {
+            max-height: 100%;
+            max-width: 100%;;
+          }
+        }
       }
       .position-label {
         text-align: center;
@@ -34,6 +41,13 @@ mat-dialog-content {
       .home-level {
         margin-top: 5px;
         text-align: left;
+        .img-wrapper {
+          height: 100px;
+          img {
+            max-height: 100%;
+            max-width: 100%;;
+          }
+        }
       }
       .center {
         text-align: center;
