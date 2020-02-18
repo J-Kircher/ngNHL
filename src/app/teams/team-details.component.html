@@ -9,12 +9,12 @@
   <mat-card class="team-card">
     <!-- <div fxLayout="row" fxLayoutAlign="space-between center"> -->
     <div fxLayout="row" fxLayoutAlign="center center">
-      <!-- <div class="image-container"><img src="/assets/images/{{team?.abbrev}}-L.png" [alt]="team?.name"></div> -->
+      <!-- <div class="image-container"><img src="./assets/images/{{team?.abbrev}}-L.png" [alt]="team?.name"></div> -->
       <div class="image-container" [ngClass]="{ 'stanley-cup-trophy': (teamIdx === StanleyCupChamp) }"
         fxLayout="row" fxLayoutAlign="space-around center">
-        <img src="/assets/images/{{team?.abbrev}}_LG.png" [ngClass]="{ 'stanley-cup-champ': (teamIdx === StanleyCupChamp) }" [alt]="team?.name">
+        <img src="./assets/images/{{team?.abbrev}}_LG.png" [ngClass]="{ 'stanley-cup-champ': (teamIdx === StanleyCupChamp) }" [alt]="team?.name">
       </div>
-      <!-- <div class="image-container"><img src="/assets/images/{{team?.abbrev}}-R.png" [alt]="team?.name"></div> -->
+      <!-- <div class="image-container"><img src="./assets/images/{{team?.abbrev}}-R.png" [alt]="team?.name"></div> -->
     </div>
   </mat-card>
   <mat-card class="team-card">

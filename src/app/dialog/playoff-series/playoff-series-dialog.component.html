@@ -32,13 +32,13 @@
         <div *ngIf="series?.visitTeam || series?.homeTeam">
           <div fxFlex="40" class="visit-level">
             <div class="img-wrapper" fxLayoutAlign="end center">
-              <img src="/assets/images/{{teamsArr[series?.visitTeam]?.abbrev}}_LG.png" [alt]="teamsArr[series?.visitTeam]?.name">
+              <img src="./assets/images/{{teamsArr[series?.visitTeam]?.abbrev}}_LG.png" [alt]="teamsArr[series?.visitTeam]?.name">
             </div>
           </div>
           <div fxFlex="20" class="center"></div>
           <div fxFlex="40" class="home-level">
             <div class="img-wrapper" fxLayoutAlign="start center">
-              <img src="/assets/images/{{teamsArr[series?.homeTeam]?.abbrev}}_LG.png" height="100px" [alt]="teamsArr[series?.homeTeam]?.name">
+              <img src="./assets/images/{{teamsArr[series?.homeTeam]?.abbrev}}_LG.png" height="100px" [alt]="teamsArr[series?.homeTeam]?.name">
             </div>
           </div>
         </div>
@@ -175,7 +175,7 @@
           <table>
             <tr class="game-row" *ngFor="let game of games, let i = index" (click)="getResults(game.id, (game.visitScore + game.homeScore))">
               <td class="check"><mat-icon *ngIf="game.homeScore < game.visitScore">check_circle</mat-icon></td>
-              <td class="logo"><img src="/assets/images/{{teamsArr[game.visitTeam].abbrev}}.png"></td>
+              <td class="logo"><img src="./assets/images/{{teamsArr[game.visitTeam].abbrev}}.png"></td>
               <td class="game-info visit">
                 <span class="team-city">{{teamsArr[game.visitTeam].city}}</span>
                 <br>
@@ -189,7 +189,7 @@
                 <br>
                 <span class="team-name">{{teamsArr[game.homeTeam].name}}</span>
               </td>
-              <td class="logo"><img src="/assets/images/{{teamsArr[game.homeTeam].abbrev}}.png"></td>
+              <td class="logo"><img src="./assets/images/{{teamsArr[game.homeTeam].abbrev}}.png"></td>
               <td class="check"><mat-icon *ngIf="game.homeScore > game.visitScore">check_circle</mat-icon></td>
             </tr>
           </table>

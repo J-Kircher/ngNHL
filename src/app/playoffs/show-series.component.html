@@ -1,7 +1,7 @@
 <div class="show-series" fxLayout="row" fxLayoutAlign="space-around center" *ngIf="!loading">
   <div fxLayout="column" fxLayoutAlign="space-around center" fxFlex>
     <div class="team-info">
-      <img src="/assets/images/{{teamsArr[series.visitTeam].abbrev}}.png" class="logo">
+      <img src="./assets/images/{{teamsArr[series.visitTeam].abbrev}}.png" class="logo">
       <span class="series">{{series.visitWins}}</span>
       <span>
         <span class="team-city">{{teamsArr[series.visitTeam].city}}</span><br>
@@ -9,7 +9,7 @@
       </span>
     </div>
     <div class="team-info">
-      <img src="/assets/images/{{teamsArr[series.homeTeam].abbrev}}.png" class="logo">
+      <img src="./assets/images/{{teamsArr[series.homeTeam].abbrev}}.png" class="logo">
       <span class="series">{{series.homeWins}}</span>
       <span>
         <span class="team-city">{{teamsArr[series.homeTeam].city}}</span><br>
@@ -23,6 +23,6 @@
 </div>
 
 <mat-card *ngIf="loading">
-  <div class="loading-image"><img src="/assets/images/loading.gif" height="40px"></div>
+  <div class="loading-image"><img src="./assets/images/loading.gif" height="40px"></div>
   <div class="loading-font">&nbsp; Loading Game &hellip;</div>
 </mat-card>
