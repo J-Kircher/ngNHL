@@ -1,4 +1,4 @@
-import { IScheduleBase } from '../model/NHL.model';
+import { IScheduleBase } from '@app/model/NHL.model';
 
 export const _SCHEDULE: IScheduleBase[] = [
   { 'gameday': 'October 2', 'games': [ 13, 15, 7, 21, 29, 26, 28, 30 ] },

@@ -3,13 +3,13 @@ import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 
-import { ISchedule, IScheduleBase, ITeam, IGameResults } from '../model/nhl.model';
-import { TeamService } from '../service/team.service';
-import { GameService } from '../service/game.service';
-import { StorageService } from '../service/storage.service';
-import { PlayNHLGame } from '../shared/PlayNHLGame';
+import { ISchedule, IScheduleBase, ITeam, IGameResults } from '@app/model/nhl.model';
+import { TeamService } from '@app/service/team.service';
+import { GameService } from '@app/service/game.service';
+import { StorageService } from '@app/service/storage.service';
+import { PlayNHLGame } from '@app/shared/PlayNHLGame';
 
-import { _SCHEDULE } from '../shared/NHLSchedule2019';
+import { _SCHEDULE } from '@app/shared/NHLSchedule2019';
 
 @Injectable()
 export class ScheduleService {

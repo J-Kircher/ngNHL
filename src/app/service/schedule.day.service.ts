@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { ISchedule } from '../model/nhl.model';
+import { ISchedule } from '@app/model/nhl.model';
 
 @Injectable()
 export class ScheduleDayService {

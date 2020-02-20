@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { ISchedule, IScheduleBase, ITeam, IGameResults, IPlayoffSeries } from '../model/nhl.model';
-import { TeamService } from '../service/team.service';
-import { GameService } from '../service/game.service';
-import { StorageService } from '../service/storage.service';
-import { sortDivision, sortConference, sortNonConference } from '../common/sort';
-import { PlayNHLGame } from '../shared/PlayNHLGame';
+import { ISchedule, IScheduleBase, ITeam, IGameResults, IPlayoffSeries } from '@app/model/nhl.model';
+import { TeamService } from '@app/service/team.service';
+import { GameService } from '@app/service/game.service';
+import { StorageService } from '@app/service/storage.service';
+import { sortDivision, sortConference, sortNonConference } from '@app/common/sort';
+import { PlayNHLGame } from '@app/shared/PlayNHLGame';
 
 const SCHEDULE: IScheduleBase[] = [
   {'gameday': 'First Round', 'games': [3, 0, 11, 8, 7, 4, 15, 12, 2, 1, 10, 9, 6, 5, 14, 13]},

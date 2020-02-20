@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TeamService } from '../service/team.service';
-import { ITeam, IPlayoffSeries } from '../model/nhl.model';
-import { calculateOdds } from '../common/odds';
+import { TeamService } from '@app/service/team.service';
+import { ITeam, IPlayoffSeries } from '@app/model/nhl.model';
+import { calculateOdds } from '@app/common/odds';
 
 @Component({
   selector: 'show-series',

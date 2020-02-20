@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
-import { TeamService } from '../../service/team.service';
-import { ITeam, ISchedule, IPlayoffSeries } from '../../model/nhl.model';
-import { PlayoffService } from '../../service/playoff.service';
-import { ResultsDialogComponent } from '../results/results-dialog.component';
-import { MatchupDialogComponent } from '../matchup/matchup-dialog.component';
+import { TeamService } from '@app/service/team.service';
+import { ITeam, ISchedule, IPlayoffSeries } from '@app/model/nhl.model';
+import { PlayoffService } from '@app/service/playoff.service';
+import { ResultsDialogComponent } from '@app/dialog/results/results-dialog.component';
+import { MatchupDialogComponent } from '@app/dialog/matchup/matchup-dialog.component';
 
 @Component({
   selector: 'app-playoff-series-dialog',

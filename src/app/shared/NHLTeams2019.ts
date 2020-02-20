@@ -1,4 +1,4 @@
-import { ITeam } from '../model/nhl.model';
+import { ITeam } from '@app/model/nhl.model';
 
 export const _TEAMS: ITeam[] = [
   { 'city': 'Carolina',     'name': 'Hurricanes',     'abbrev': 'CAR', 'lightcolor': 'FF0008', 'darkcolor': '181818', 'chartcolor': 'A20006', 'division': 'East Metro',    'of': 8, 'de': 8, 'pp': 7, 'pk': 9, 'go': 7, 'co': 7 },

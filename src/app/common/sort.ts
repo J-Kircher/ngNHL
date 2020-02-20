@@ -1,4 +1,4 @@
-import { ITeam } from '../model/nhl.model';
+import { ITeam } from '@app/model/nhl.model';
 
 export function sortDivision(t1: ITeam, t2: ITeam): number {
   if (t1.points < t2.points) {
