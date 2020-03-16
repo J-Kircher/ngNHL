@@ -44,6 +44,14 @@ mat-card {
       }
     }
 
+    .normal-zoom {
+      zoom: 1;
+    }
+
+    .zoom-out {
+      zoom: 0.5;
+    }
+
     .bracket {
       $side-margin: 40px;
       $vertical-margin: 10px;
@@ -55,15 +63,15 @@ mat-card {
         position: absolute;
         top: 0;
         left: 0;
+      }
 
-        .stanley-cup-trophy {
-          width: 90px;
-          height: 200px;
-          background-image: url('/assets/images/StanleyCup.png');
-          .stanley-cup-champ {
-            margin-top: 50px;
-            width: 45%;
-          }
+      .stanley-cup-trophy {
+        width: 90px;
+        height: 200px;
+        background-image: url('/assets/images/StanleyCup.png');
+        .stanley-cup-champ {
+          margin-top: 50px;
+          width: 45%;
         }
       }
 

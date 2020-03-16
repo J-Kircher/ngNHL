@@ -12,7 +12,7 @@ mat-card {
   }
   .schedule-body {
     max-height: 181px;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
     .month-container {
