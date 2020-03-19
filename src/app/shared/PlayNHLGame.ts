@@ -59,8 +59,8 @@ export class PlayNHLGame {
           theLoop(i);
         } else {
           if (game.visitScore === game.homeScore) {
-            // console.log('[PlayNHLGame] playNHLGame() Game: ' + game.id + ' - FORECD OVERTIME!');
-            game.homeScore += 3;
+            // console.log('[PlayNHLGame] playNHLGame() Game: ' + game.id + ' - FORCED OVERTIME!');
+            game.homeScore += 1;
             game.gameResults.push({ teamScored: game.homeTeam, period: 'OT', goals: 1 });
           }
           // console.log('[PlayNHLGame] playNHLGame() game over');
