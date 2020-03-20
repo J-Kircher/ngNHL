@@ -18,46 +18,24 @@
     </div>
   </mat-card>
   <mat-card class="team-card">
-    <table width="100%">
-      <tr [ngStyle]="{'background-color':'#'+team.lightcolor}">
-        <td>OF</td>
-        <td>DE</td>
-        <td>PP</td>
-        <td>PK</td>
-        <td>GO</td>
-        <td>CO</td>
-        <td>Total</td>
-      </tr>
-      <tr [ngStyle]="{'color':'white','background-color':'#'+team.darkcolor}">
-        <td>{{team.of}}</td>
-        <td>{{team.de}}</td>
-        <td>{{team.pp}}</td>
-        <td>{{team.pk}}</td>
-        <td>{{team.go}}</td>
-        <td>{{team.co}}</td>
-        <td>{{total}}</td>
-      </tr>
-    </table>
+    <mat-table [dataSource]="dataSource">
+      <ng-container *ngFor="let col of attColumns" [matColumnDef]="col">
+        <mat-header-cell *matHeaderCellDef [ngStyle]="{'background-color':'#'+team.lightcolor}"> {{ col.length > 2 ? (col | capitalize) : (col | uppercase) }} </mat-header-cell>
+        <mat-cell *matCellDef="let team" [ngStyle]="{'color':'white','background-color':'#'+team.darkcolor}"> {{ team[col] }} </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="attColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: attColumns;"></mat-row>
+    </mat-table>
   </mat-card>
   <mat-card class="team-card">
-    <table width="100%">
-      <tr [ngStyle]="{'background-color':'#'+team.lightcolor}">
-        <td>Wins</td>
-        <td>Losses</td>
-        <td>OTL</td>
-        <td>Points</td>
-        <td>GF</td>
-        <td>GA</td>
-      </tr>
-      <tr [ngStyle]="{'color':'white','background-color':'#'+team.darkcolor}">
-        <td>{{team.wins}}</td>
-        <td>{{team.losses}}</td>
-        <td>{{team.otl}}</td>
-        <td>{{team.points}}</td>
-        <td>{{team.gf}}</td>
-        <td>{{team.ga}}</td>
-      </tr>
-    </table>
+    <mat-table [dataSource]="dataSource">
+      <ng-container *ngFor="let col of statsColumns" [matColumnDef]="col">
+        <mat-header-cell *matHeaderCellDef [ngStyle]="{'background-color':'#'+team.lightcolor}"> {{ col.length > 2 ? (col | capitalize) : (col | uppercase) }} </mat-header-cell>
+        <mat-cell *matCellDef="let team" [ngStyle]="{'color':'white','background-color':'#'+team.darkcolor}"> {{ team[col] }} </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="statsColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: statsColumns;"></mat-row>
+    </mat-table>
   </mat-card>
 </mat-card>
 <team-schedule></team-schedule>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { MatTableDataSource } from '@angular/material';
 import { TeamService } from '@app/service/team.service';
 import { PlayoffService } from '@app/service/playoff.service';
 import { ITeam } from '@app/model/nhl.model';
@@ -15,6 +16,9 @@ export class TeamDetailsComponent implements OnInit {
   teamIdx: number;
   total: number;
   StanleyCupChamp: number;
+  attColumns: string[] = [];
+  statsColumns: string[] = [];
+  dataSource = new MatTableDataSource();
 
   constructor(
     private teamService: TeamService,
@@ -29,5 +33,8 @@ export class TeamDetailsComponent implements OnInit {
       this.total = this.team.of + this.team.de + this.team.pp + this.team.pk + this.team.go + this.team.co;
     });
     this.playoffService.StanleyCupChamp$.subscribe(data => this.StanleyCupChamp = data);
+    this.attColumns = ['of', 'de', 'pp', 'pk', 'go', 'co', 'total'];
+    this.statsColumns = ['wins', 'losses', 'gf', 'ga'];
+    this.dataSource = new MatTableDataSource([this.team]);
   }
 }
