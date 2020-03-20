@@ -31,23 +31,19 @@ export class StandingsDivisionComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.scheduleService.currentGame$.subscribe(data => this.currentGame = data);
-    this.displayedColumns = ['team', 'wins', 'losses', 'otl', 'points', 'gf', 'ga', 'homewins', 'visitwins', 'divwins', 'confwins', 'othwins'];
+    this.teamService.getTeams().subscribe((data: ITeam[]) => {
+      this.teamsArr = data;
+    }, (err) => {
+      console.error('[standings-div] ngOnInit() getTeams() error: ' + err);
+    }, () => {
+      // console.log('[standings-div] ngOnInit() getTeams() SUCCESS');
+      this.loading = false;
+    });
+  this.displayedColumns = ['team', 'wins', 'losses', 'otl', 'points', 'gf', 'ga', 'homewins', 'visitwins', 'divwins', 'confwins', 'othwins'];
   }
 
   ngDoCheck() {
     // console.log('[standings-div] ngDoCheck() division: ' + this.division);
-    // this.teamsArr = this.teamService.getTeams().map(teams => teams);
-    // this.divisionTeams = this.getTeamsForDivision(this.division);
-
-    if (this.loading) {
-      this.teamService.getTeams().subscribe((data: ITeam[]) => {
-        this.teamsArr = data;
-        // console.log('[standings-div] ngDoCheck() getTeams() SUCCESS');
-        this.loading = false;
-      }, (err) => {
-        console.error('[standings-div] ngDoCheck() getTeams() error: ' + err);
-      });
-    }
 
     if (this.currentGame > 0) {
       this.divisionTeams = this.teamService.getTeamsForDivision(this.division).sort(sortDivision);
