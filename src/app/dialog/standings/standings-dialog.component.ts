@@ -7,6 +7,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./standings-dialog.component.scss']
 })
 export class StandingsDialogComponent implements OnInit {
+  loading: boolean = true;
 
   constructor(
     public dialogRef: MatDialogRef<StandingsDialogComponent>,
@@ -14,6 +15,7 @@ export class StandingsDialogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loading = false;
   }
 
   onClose(): void {

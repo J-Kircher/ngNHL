@@ -62,7 +62,7 @@ export class StandingsChartComponent implements OnInit {
     });
   }
 
-  createChartObject(chartDivision: string): void {
+  createChartObject(chartDivision: string = null): void {
     // console.log('[standings-chart] createChartObject() chartDivision: ' + chartDivision);
 
     if (chartDivision == null) {

@@ -39,7 +39,8 @@ export class StandingsDivisionComponent implements OnInit, DoCheck {
       // console.log('[standings-div] ngOnInit() getTeams() SUCCESS');
       this.loading = false;
     });
-  this.displayedColumns = ['team', 'wins', 'losses', 'otl', 'points', 'gf', 'ga', 'homewins', 'visitwins', 'divwins', 'confwins', 'othwins'];
+    this.displayedColumns = ['team', 'wins', 'losses', 'otl', 'points', 'gf', 'ga',
+      'homewins', 'visitwins', 'divwins', 'confwins', 'othwins'];
   }
 
   ngDoCheck() {
