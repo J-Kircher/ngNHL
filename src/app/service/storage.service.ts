@@ -12,7 +12,7 @@ export class StorageService {
     let config;
 
     try {
-      const configText = localStorage.getItem('fullSchedule');
+      const configText = localStorage.getItem('NHLfullSchedule');
 
       if (configText) {
         config = JSON.parse(configText);
@@ -26,11 +26,11 @@ export class StorageService {
     return config;
   }
 
-  public storeScheduleToLocalStorage(newFullSchedule: ISchedule[]): void {
+  public storeScheduleToLocalStorage(newNHLfullSchedule: ISchedule[]): void {
     // console.log('[storage.service] storeScheduleToLocalStorage()');
     try {
-      const configText = JSON.stringify(newFullSchedule);
-      localStorage.setItem('fullSchedule', configText);
+      const configText = JSON.stringify(newNHLfullSchedule);
+      localStorage.setItem('NHLfullSchedule', configText);
     } catch (e) {
       console.warn('[storage.service] storeScheduleToLocalStorage() Error reading from local storage');
     }
@@ -38,7 +38,7 @@ export class StorageService {
 
   public clearScheduleFromStorage(): Observable<boolean> {
     const subject = new Subject<boolean>();
-    localStorage.removeItem('fullSchedule');
+    localStorage.removeItem('NHLfullSchedule');
     setTimeout(() => {
       subject.next(true);
       subject.complete();
@@ -51,7 +51,7 @@ export class StorageService {
     let config;
 
     try {
-      const configText = localStorage.getItem('teams');
+      const configText = localStorage.getItem('NHLteams');
 
       if (configText) {
         config = JSON.parse(configText);
@@ -65,11 +65,11 @@ export class StorageService {
     return config;
   }
 
-  public storeTeamsToLocalStorage(newTeams: ITeam[]): void {
+  public storeTeamsToLocalStorage(newNHLteams: ITeam[]): void {
     // console.log('[storage.service] storeTeamsToLocalStorage()');
     try {
-      const configText = JSON.stringify(newTeams);
-      localStorage.setItem('teams', configText);
+      const configText = JSON.stringify(newNHLteams);
+      localStorage.setItem('NHLteams', configText);
     } catch (e) {
       console.warn('[storage.service] storeTeamsToLocalStorage() Error reading from local storage');
     }
@@ -77,7 +77,7 @@ export class StorageService {
 
   public clearTeamsFromStorage(): Observable<boolean> {
     const subject = new Subject<boolean>();
-    localStorage.removeItem('teams');
+    localStorage.removeItem('NHLteams');
     setTimeout(() => {
       subject.next(true);
       subject.complete();
@@ -90,7 +90,7 @@ export class StorageService {
     let config;
 
     try {
-      const configText = localStorage.getItem('playoffSchedule');
+      const configText = localStorage.getItem('NHLplayoffSchedule');
 
       if (configText) {
         config = JSON.parse(configText);
@@ -101,11 +101,11 @@ export class StorageService {
     return config;
   }
 
-  public storePlayoffScheduleToLocalStorage(newPlayoffSchedule: ISchedule[]): void {
+  public storePlayoffScheduleToLocalStorage(newNHLplayoffSchedule: ISchedule[]): void {
     // console.log('[storage.service] storePlayoffScheduleToLocalStorage()');
     try {
-      const configText = JSON.stringify(newPlayoffSchedule);
-      localStorage.setItem('playoffSchedule', configText);
+      const configText = JSON.stringify(newNHLplayoffSchedule);
+      localStorage.setItem('NHLplayoffSchedule', configText);
     } catch (e) {
       console.warn('[storage.service] storePlayoffScheduleToLocalStorage() Error reading from local storage');
     }
@@ -113,8 +113,8 @@ export class StorageService {
 
   public clearPlayoffsFromStorage(): Observable<boolean> {
     const subject = new Subject<boolean>();
-    localStorage.removeItem('playoffSeries');
-    localStorage.removeItem('playoffSchedule');
+    localStorage.removeItem('NHLplayoffSeries');
+    localStorage.removeItem('NHLplayoffSchedule');
     setTimeout(() => {
       subject.next(true);
       subject.complete();
@@ -127,7 +127,7 @@ export class StorageService {
     let config;
 
     try {
-      const configText = localStorage.getItem('playoffSeries');
+      const configText = localStorage.getItem('NHLplayoffSeries');
 
       if (configText) {
         config = JSON.parse(configText);
@@ -138,11 +138,11 @@ export class StorageService {
     return config;
   }
 
-  public storePlayoffSeriesToLocalStorage(newPlayoffSeries: IPlayoffSeries[]): void {
+  public storePlayoffSeriesToLocalStorage(newNHLplayoffSeries: IPlayoffSeries[]): void {
     // console.log('[storage.service] storePlayoffSeriesToLocalStorage()');
     try {
-      const configText = JSON.stringify(newPlayoffSeries);
-      localStorage.setItem('playoffSeries', configText);
+      const configText = JSON.stringify(newNHLplayoffSeries);
+      localStorage.setItem('NHLplayoffSeries', configText);
     } catch (e) {
       console.warn('[storage.service] storePlayoffSeriesToLocalStorage() Error reading from local storage');
     }
