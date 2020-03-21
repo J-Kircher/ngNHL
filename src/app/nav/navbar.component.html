@@ -37,6 +37,7 @@
     <a mat-menu-item [routerLink]="['/playoffs']" id="playoffs" *ngIf="postseason">Playoffs</a>
     <a mat-menu-item id="topTeams" (click)="getTopTeams()">Top Teams</a>
     <a mat-menu-item id="help">Help</a>
+    <a mat-menu-item [matMenuTriggerFor]="settingsMenu">Settings</a>
   </mat-menu>
 </mat-toolbar>
 <mat-progress-bar color="accent" mode="determinate" [value]="progress"></mat-progress-bar>
