@@ -168,12 +168,19 @@ export class StandingsChartComponent implements OnInit {
             for (const key of Object.keys(ds._meta)) {
               const dsMeta = ds._meta[key];
               if (ds.abbrev) {
-                const img = new Image(20, 20);
+                const img = new Image();
+                img.onload = function() {
+                  const imgW = img.width;
+                  const imgH = img.height;
+                  img.setAttribute('height', '20px');
+                  const newWidth = Math.round((20 / imgH) * imgW) || 20;
+                  img.setAttribute('width', newWidth + 'px');
+                  const len = (dsMeta.data.length - 1);
+                  if (len > -1) {
+                    dsMeta.data[len]._model.pointStyle = img;
+                  }
+                };
                 img.src = '/assets/images/' + ds.abbrev + '_LG.png';
-                const len = (dsMeta.data.length - 1);
-                if (len > -1) {
-                  dsMeta.data[len]._model.pointStyle = img;
-                }
               }
             }
           });
