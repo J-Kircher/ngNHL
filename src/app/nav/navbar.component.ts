@@ -32,6 +32,7 @@ export class NavBarComponent implements OnInit {
   oneGameAtATime: boolean = true;
   gameActive: boolean = false;
   seasonOver: boolean = false;
+  StanleyCupChamp: number;
 
   constructor(
     private router: Router,
@@ -56,6 +57,7 @@ export class NavBarComponent implements OnInit {
     this.gameService.gameActive$.subscribe(data => this.gameActive = data);
     this.scheduleService.finalGame$.subscribe(data => this.finalGame = data);
     this.progress = Math.round((this.currentGame / this.finalGame) * 1000) / 10;
+    this.playoffService.StanleyCupChamp$.subscribe(data => this.StanleyCupChamp = data);
   }
 
   initPlayoffs() {
@@ -110,7 +112,9 @@ export class NavBarComponent implements OnInit {
         if (this.playoffService.playPlayoffGame(this.simFast)) {
           // Keep playing
         } else {
-          this.seasonOver = true;
+          if (this.StanleyCupChamp) {
+            this.seasonOver = true;
+          }
         }
       }
     }
