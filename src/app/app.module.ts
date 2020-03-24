@@ -39,6 +39,7 @@ import { PlayoffSeriesDialogComponent } from '@app/dialog/playoff-series/playoff
 import { CapitalizePipe } from '@app/common/capitalize.pipe';
 import { StandingsDialogComponent } from '@app/dialog/standings/standings-dialog.component';
 import { StandingsChartComponent } from '@app/chart/standings-chart/standings-chart.component';
+import { ConfirmDialogComponent } from '@app/dialog/confirm/confirm-dialog.component';
 
 // Loads application runtime config
 export const appInitializerFn = (appConfig: ConfigService) => {
@@ -63,6 +64,7 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     ResultsDialogComponent,
     PlayoffSeriesDialogComponent,
     StandingsDialogComponent,
+    ConfirmDialogComponent,
     MatSpinner
   ],
   declarations: [
@@ -90,7 +92,8 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     PlayoffSeriesDialogComponent,
     CapitalizePipe,
     StandingsDialogComponent,
-    StandingsChartComponent
+    StandingsChartComponent,
+    ConfirmDialogComponent
   ],
   providers: [
     TeamService,
