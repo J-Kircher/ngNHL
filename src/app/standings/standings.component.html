@@ -1,7 +1,7 @@
 <mat-card *ngIf="!loading">
   <div class="standings-text" fxLayoutAlign="space-between">
     <div>Standings</div>
-    <button mat-raised-button type="button" matTooltip="Stats Chart" (click)="openStats()">
+    <button mat-raised-button type="button" matTooltip="Stats Chart" (click)="openStats()" fxShow fxHide.lt-sm>
       <mat-icon aria-hidden="false" aria-label="Stats Chart">show_chart</mat-icon>
     </button>
   </div>
@@ -14,10 +14,13 @@
       </div>
     </mat-tab>
     <mat-tab label="Expanded">
-      <div id="expanded" fxLayout="column">
+      <div id="expanded" fxLayout="column" fxShow fxHide.lt-sm>
         <div class="div-body" *ngFor="let division of divisions">
           <standings-division [division]="division" format="expanded"></standings-division>
         </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center" fxHide fxShow.lt-sm>
+        <mat-icon style="padding: 15px;">screen_rotation</mat-icon>Use Landscape mode for Expanded standings
       </div>
     </mat-tab>
   </mat-tab-group>
