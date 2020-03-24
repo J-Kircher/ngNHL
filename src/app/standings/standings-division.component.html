@@ -15,43 +15,43 @@
 
     <!-- Wins Column -->
     <ng-container matColumnDef="wins">
-      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> W </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="isMobileView()" arrowPosition="before"> W </mat-header-cell>
       <mat-cell *matCellDef="let team"> {{team.wins}} </mat-cell>
     </ng-container>
 
     <!-- Losses Column -->
     <ng-container matColumnDef="losses">
-      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> L </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="isMobileView()" arrowPosition="before"> L </mat-header-cell>
       <mat-cell *matCellDef="let team"> {{team.losses}} </mat-cell>
     </ng-container>
 
     <!-- OT Losses Column -->
     <ng-container matColumnDef="otl">
-      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> OTL </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="isMobileView()" arrowPosition="before"> OTL </mat-header-cell>
       <mat-cell *matCellDef="let team"> {{team.otl}} </mat-cell>
     </ng-container>
 
     <!-- Points Column -->
     <ng-container matColumnDef="points">
-      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> Pts </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="isMobileView()" arrowPosition="before"> Pts </mat-header-cell>
       <mat-cell *matCellDef="let team"> {{team.points}} </mat-cell>
     </ng-container>
 
     <!-- Total Column -->
     <ng-container matColumnDef="total">
-      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> Total </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="isMobileView()" arrowPosition="before"> Total </mat-header-cell>
       <mat-cell *matCellDef="let team"> {{team.total}} </mat-cell>
     </ng-container>
 
     <!-- Goals For Column -->
     <ng-container matColumnDef="gf">
-      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> GF </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="isMobileView()" arrowPosition="before"> GF </mat-header-cell>
       <mat-cell *matCellDef="let team"> {{team.gf}} </mat-cell>
     </ng-container>
 
     <!-- Goals Against Column -->
     <ng-container matColumnDef="ga">
-      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> GA </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="isMobileView()" arrowPosition="before"> GA </mat-header-cell>
       <mat-cell *matCellDef="let team"> {{team.ga}} </mat-cell>
     </ng-container>
 
