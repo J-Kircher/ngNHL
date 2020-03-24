@@ -12,6 +12,17 @@
   }
 }
 
+.normal-zoom {
+  min-width: 600px;
+  zoom: 1;
+}
+
+.zoom-out {
+  min-width: auto;
+  max-height: 90vh;
+  zoom: 0.7;
+}
+
 mat-dialog-content {
   min-width: 60vw;
 }
