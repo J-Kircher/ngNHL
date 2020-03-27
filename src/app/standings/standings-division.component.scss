@@ -64,28 +64,31 @@ mat-card {
 
   &.standard {
     .mat-column-team {
-      flex: 1 1 43% !important;
+      flex: 0 0 185px !important;
+      @media only screen and (max-width: 600px) {
+        flex: 0 0 70px !important;
+      }
     }
     .mat-column-wins {
-      flex: 1 1 9% !important;
+      flex: 1 1 !important;
     }
     .mat-column-losses {
-      flex: 1 1 9% !important;
+      flex: 1 1 !important;
     }
     .mat-column-otl {
-      flex: 1 1 9% !important;
+      flex: 1 1 !important;
     }
     .mat-column-points {
-      flex: 1 1 10% !important;
+      flex: 1 1 !important;
     }
     .mat-column-total {
-      flex: 1 1 10% !important;
+      flex: 1 1 !important;
     }
     .mat-column-gf {
-      flex: 1 1 10% !important;
+      flex: 1 1 !important;
     }
     .mat-column-ga {
-      flex: 1 1 10% !important;
+      flex: 1 1 !important;
     }
     .mat-column-homewins {
       flex: 0 0 0px !important;
