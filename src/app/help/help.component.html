@@ -27,7 +27,7 @@
     </section>
     <section fxLayout="column">
       <article>
-        Here is a description of the navigation links:
+        The following is a description of the links in the nav bar:
       </article>
       <article>
         <div class="heading">
@@ -60,7 +60,8 @@
               Standard/Expanded
             </div>
             <div>
-              Use these tabs to alternate the view of the standings.
+              Use these tabs to alternate the view of the standings. Expanded view is not available
+              in portrait mode on mobile.
             </div>
           </div>
           <div class="inner">
@@ -69,7 +70,10 @@
             </div>
             <div>
               Clicking the chart button will display a division progress chart. The chart can display
-              total progress or net progress.
+              total progress or net progress. The chart button will appear as <button mat-raised-button
+              matTooltip="Stats Chart" style="padding: 0px; min-width: 36px;" color="accent">
+              <mat-icon aria-hidden="false" aria-label="Stats Chart">show_chart</mat-icon></button>.
+              It is not available in portrait mode on mobile.
             </div>
           </div>
         </div>
@@ -127,6 +131,12 @@
               the entire season or one game at a time. The second will determine the speed of each
               simulated game. Clicking Cancel will run the simuation with the default options,
               one game at a time, and slower.
+            </div>
+          </div>
+          <div class="inner">
+            <div>
+              The "Simulate" button will appear as <button mat-mini-fab>
+              <mat-icon>speed</mat-icon></button> on mobile.
             </div>
           </div>
         </div>
