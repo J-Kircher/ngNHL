@@ -40,6 +40,7 @@ import { CapitalizePipe } from '@app/common/capitalize.pipe';
 import { StandingsDialogComponent } from '@app/dialog/standings/standings-dialog.component';
 import { StandingsChartComponent } from '@app/chart/standings-chart/standings-chart.component';
 import { ConfirmDialogComponent } from '@app/dialog/confirm/confirm-dialog.component';
+import { HelpComponent } from '@app/help/help.component';
 
 // Loads application runtime config
 export const appInitializerFn = (appConfig: ConfigService) => {
@@ -93,7 +94,8 @@ export const appInitializerFn = (appConfig: ConfigService) => {
     CapitalizePipe,
     StandingsDialogComponent,
     StandingsChartComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    HelpComponent
   ],
   providers: [
     TeamService,
