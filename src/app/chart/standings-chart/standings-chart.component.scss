@@ -1,0 +1,10 @@
+.chart-container {
+  .actions-container {
+    min-width: 65vw;
+    padding-bottom: 4px;
+  }
+  mat-button-toggle-group {
+    margin-left: 8px;
+    overflow-x: auto;
+  }
+}

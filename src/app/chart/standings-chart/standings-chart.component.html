@@ -1,7 +1,7 @@
 <div class="chart-container" fxLayout="column">
   <div>{{ chartDivision | capitalize }}</div>
   <canvas id="myCanvas"></canvas>
-  <div fxLayoutAlign="space-evenly">
+  <div fxLayoutAlign="space-evenly" class="actions-container">
     <div fxLayoutAlign="space-around center">
       <span style="padding-right: 12px;">Total</span>
       <mat-slide-toggle [(ngModel)]="chartStyle" (change)="createChartObject()">Net</mat-slide-toggle>
