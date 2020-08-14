@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Http, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
@@ -20,7 +19,7 @@ export class TeamService {
   private TEAMS: ITeam[];
 
   constructor (
-    public http: Http,
+    public http: HttpClient,
     private configService: ConfigService,
     private storageService: StorageService
   ) { }
