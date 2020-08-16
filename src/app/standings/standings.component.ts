@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { TeamService } from '@app/service/team.service';
 import { ITeam } from '@app/model/nhl.model';
 import { StandingsDialogComponent } from '@app/dialog/standings/standings-dialog.component';

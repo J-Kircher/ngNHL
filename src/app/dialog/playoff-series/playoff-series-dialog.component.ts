@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { TeamService } from '@app/service/team.service';
 import { ITeam, ISchedule, IPlayoffSeries } from '@app/model/nhl.model';
 import { PlayoffService } from '@app/service/playoff.service';

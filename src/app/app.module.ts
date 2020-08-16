@@ -33,7 +33,7 @@ import { StorageService } from '@app/service/storage.service';
 import { MaterialElevationDirective } from '@app/shared/material-elevation.directive';
 import { GameService } from '@app/service/game.service';
 import { SpinnerButtonDirective } from '@app/shared/spinner-button.directive';
-import { MatSpinner } from '@angular/material';
+import { MatSpinner } from '@angular/material/progress-spinner';
 import { ShowSeriesComponent } from '@app/playoffs/show-series.component';
 import { PlayoffSeriesDialogComponent } from '@app/dialog/playoff-series/playoff-series-dialog.component';
 import { CapitalizePipe } from '@app/common/capitalize.pipe';
