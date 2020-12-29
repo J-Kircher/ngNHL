@@ -13,7 +13,7 @@ export class ScheduleCalenderComponent implements OnInit, AfterContentInit {
   NHLCalendarArr: NHLCalendar[] = [];
   gameDay: string;
   gamesArr: ISchedule[] = [];
-  scheduleYear: number = 2019;
+  scheduleYear: number = 2020;
 
   constructor(
     private scheduleService: ScheduleService,
@@ -24,13 +24,11 @@ export class ScheduleCalenderComponent implements OnInit, AfterContentInit {
     // console.log('[schedule-calendar] ngOnInit() scheduleYear: ' + this.scheduleYear);
     const nextYear = this.scheduleYear + 1;
     this.NHLCalendarArr = [
-      { month: 10, year: this.scheduleYear },
-      { month: 11, year: this.scheduleYear },
-      { month: 12, year: this.scheduleYear },
       { month: 1, year: nextYear },
       { month: 2, year: nextYear },
       { month: 3, year: nextYear },
       { month: 4, year: nextYear },
+      { month: 5, year: nextYear }
     ];
     this.scheduleService.currentGameDay$.subscribe(data => this.gameDay = data);
   }
