@@ -637,31 +637,33 @@ export class PlayoffService {
           }
         });
 
+        // Covid - Only intradivision
         divisions
           .filter(division => division.indexOf('East') > -1 )
           .forEach((division, i) => {
             const thisDiv: ITeam[] = teamsArr.filter(team => (team.division === division));
             thisDiv.sort(sortDivision);
             if (i === 0) {
-              EASTMetro = thisDiv.slice(0, 3);
-              EASTOthers = thisDiv.slice(3);
+              EASTMetro = thisDiv.slice(0, 4); // Covid EASTMetro = thisDiv.slice(0, 3);
+              EASTOthers = thisDiv.slice(4); // Covid EASTOthers = thisDiv.slice(3);
             } else {
-              EASTAtlantic = thisDiv.slice(0, 3);
-              EASTOthers = EASTOthers.concat(thisDiv.slice(3));
+              EASTAtlantic = thisDiv.slice(0, 4); // Covid EASTAtlantic = thisDiv.slice(0, 3);
+              EASTOthers = EASTOthers.concat(thisDiv.slice(4)); // Covid EASTOthers = EASTOthers.concat(thisDiv.slice(3));
             }
           });
 
-        EASTOthers.sort(sortConference);
+        // Suspended for 2020-21 Season (56-game covid shortened)
+        // EASTOthers.sort(sortConference);
 
-        if (sortDivision(EASTMetro[0], EASTAtlantic[0]) === 1) {
-          // Atlantic is better, they get the #2 WC
-          EASTMetro.push(EASTOthers[0]);
-          EASTAtlantic.push(EASTOthers[1]);
-        } else {
-          // Metro is better, they get the #2 WC
-          EASTMetro.push(EASTOthers[1]);
-          EASTAtlantic.push(EASTOthers[0]);
-        }
+        // if (sortDivision(EASTMetro[0], EASTAtlantic[0]) === 1) {
+        //   // Atlantic is better, they get the #2 WC
+        //   EASTMetro.push(EASTOthers[0]);
+        //   EASTAtlantic.push(EASTOthers[1]);
+        // } else {
+        //   // Metro is better, they get the #2 WC
+        //   EASTMetro.push(EASTOthers[1]);
+        //   EASTAtlantic.push(EASTOthers[0]);
+        // }
 
         this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTMetro[0].abbrev));
         this.EASTPlayoffTeams.push(this.teamService.getTeamIndex(EASTMetro[1].abbrev));
@@ -699,31 +701,33 @@ export class PlayoffService {
           }
         });
 
+        // Covid - Only intradivision
         divisions
           .filter(division => division.indexOf('West') > -1 )
           .forEach((division, i) => {
             const thisDiv: ITeam[] = teamsArr.filter(team => (team.division === division));
             thisDiv.sort(sortDivision);
             if (i === 0) {
-              WESTCentral = thisDiv.slice(0, 3);
-              WESTOthers = thisDiv.slice(3);
+              WESTCentral = thisDiv.slice(0, 4); // Covid WESTCentral = thisDiv.slice(0, 3);
+              WESTOthers = thisDiv.slice(4); // Covid WESTOthers = thisDiv.slice(3);
             } else {
-              WESTPacific = thisDiv.slice(0, 3);
-              WESTOthers = WESTOthers.concat(thisDiv.slice(3));
+              WESTPacific = thisDiv.slice(0, 4); // Covid WESTPacific = thisDiv.slice(0, 3);
+              WESTOthers = WESTOthers.concat(thisDiv.slice(4)); // Covid WESTOthers = WESTOthers.concat(thisDiv.slice(3));
             }
           });
 
-        WESTOthers.sort(sortConference);
+        // Suspended for 2020-21 Season (56-game covid shortened)
+        // WESTOthers.sort(sortConference);
 
-        if (sortDivision(WESTCentral[0], WESTPacific[0]) === 1) {
-          // Pacific is better, they get the #2 WC
-          WESTCentral.push(WESTOthers[0]);
-          WESTPacific.push(WESTOthers[1]);
-        } else {
-          // Central is better, they get the #2 WC
-          WESTCentral.push(WESTOthers[1]);
-          WESTPacific.push(WESTOthers[0]);
-        }
+        // if (sortDivision(WESTCentral[0], WESTPacific[0]) === 1) {
+        //   // Pacific is better, they get the #2 WC
+        //   WESTCentral.push(WESTOthers[0]);
+        //   WESTPacific.push(WESTOthers[1]);
+        // } else {
+        //   // Central is better, they get the #2 WC
+        //   WESTCentral.push(WESTOthers[1]);
+        //   WESTPacific.push(WESTOthers[0]);
+        // }
 
         this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTCentral[0].abbrev));
         this.WESTPlayoffTeams.push(this.teamService.getTeamIndex(WESTCentral[1].abbrev));
