@@ -34,7 +34,7 @@ export class TeamDetailsComponent implements OnInit {
     });
     this.playoffService.StanleyCupChamp$.subscribe(data => this.StanleyCupChamp = data);
     this.attColumns = ['of', 'de', 'pp', 'pk', 'go', 'co', 'total'];
-    this.statsColumns = ['wins', 'losses', 'gf', 'ga'];
+    this.statsColumns = ['wins', 'losses', 'otl', 'gf', 'ga'];
     this.dataSource = new MatTableDataSource([this.team]);
     window.scrollTo(0, 0);
   }
