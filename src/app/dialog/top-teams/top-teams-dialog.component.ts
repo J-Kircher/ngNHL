@@ -56,83 +56,69 @@ export class TopTeamsDialogComponent implements OnInit, DoCheck, OnDestroy {
         }
       });
 
-        // Covid - Only intradivision
-        this.divisions
+      this.divisions
         .filter(division => division.indexOf('East') > -1)
         .forEach((division, i) => {
           const thisDiv: ITeam[] = this.teamsArr.filter(team => (team.division === division));
           thisDiv.sort(sortDivision);
           if (i === 0) {
-            this.EASTMetro = thisDiv.slice(0, 4); // Covid this.EASTMetro = thisDiv.slice(0, 3);
-            this.EASTOthers = thisDiv.slice(4); // COvid this.EASTOthers = thisDiv.slice(3);
+            this.EASTMetro = thisDiv.slice(0, 3);
+            this.EASTOthers = thisDiv.slice(3);
           } else {
-            this.EASTAtlantic = thisDiv.slice(0, 4); // Covid this.EASTAtlantic = thisDiv.slice(0, 3);
-            this.EASTOthers = this.EASTOthers.concat(thisDiv.slice(4)); // Covid this.EASTOthers = this.EASTOthers.concat(thisDiv.slice(3));
+            this.EASTAtlantic = thisDiv.slice(0, 3);
+            this.EASTOthers = this.EASTOthers.concat(thisDiv.slice(3));
           }
         });
 
-      // Suspended for 2020-21 Season (56-game covid shortened)
-      // this.EASTOthers.sort(sortConference);
+      this.EASTOthers.sort(sortConference);
 
-      // if (sortDivision(this.EASTMetro[0], this.EASTAtlantic[0]) === 1) {
-      //   // Atlantic is better, they get the #2 WC
-      //   this.EASTMetro.push(this.EASTOthers[0]);
-      //   this.EASTAtlantic.push(this.EASTOthers[1]);
-      // } else {
-      //   // Metro is better, they get the #2 WC
-      //   this.EASTMetro.push(this.EASTOthers[1]);
-      //   this.EASTAtlantic.push(this.EASTOthers[0]);
-      // }
+      if (sortDivision(this.EASTMetro[0], this.EASTAtlantic[0]) === 1) {
+        // Atlantic is better, they get the #2 WC
+        this.EASTMetro.push(this.EASTOthers[0]);
+        this.EASTAtlantic.push(this.EASTOthers[1]);
+      } else {
+        // Metro is better, they get the #2 WC
+        this.EASTMetro.push(this.EASTOthers[1]);
+        this.EASTAtlantic.push(this.EASTOthers[0]);
+      }
 
       this.EASTHunt = [];
-      this.EASTHunt.push(this.EASTOthers[0]);
-      this.EASTHunt.push(this.EASTOthers[1]);
+      this.EASTHunt.push(this.EASTOthers[2]);
+      this.EASTHunt.push(this.EASTOthers[3]);
       this.EASTHunt.push(this.EASTOthers[4]);
       this.EASTHunt.push(this.EASTOthers[5]);
-      // this.EASTHunt.push(this.EASTOthers[0]);
-      // this.EASTHunt.push(this.EASTOthers[1]);
-      // this.EASTHunt.push(this.EASTOthers[2]);
-      // this.EASTHunt.push(this.EASTOthers[3]);
-      this.EASTHunt.sort(sortConference); // Covid
 
-      // Covid - Only intradivision
       this.divisions
         .filter(division => division.indexOf('West') > -1)
         .forEach((division, i) => {
           const thisDiv: ITeam[] = this.teamsArr.filter(team => (team.division === division));
           thisDiv.sort(sortDivision);
           if (i === 0) {
-            this.WESTCentral = thisDiv.slice(0, 4); // Covid this.WESTCentral = thisDiv.slice(0, 3);
-            this.WESTOthers = thisDiv.slice(4); // Covid this.WESTOthers = thisDiv.slice(3);
+            this.WESTCentral = thisDiv.slice(0, 3);
+            this.WESTOthers = thisDiv.slice(3);
           } else {
-            this.WESTPacific = thisDiv.slice(0, 4); // Covid this.WESTPacific = thisDiv.slice(0, 3);
-            this.WESTOthers = this.WESTOthers.concat(thisDiv.slice(4)); // Covid this.WESTOthers = this.WESTOthers.concat(thisDiv.slice(3));
+            this.WESTPacific = thisDiv.slice(0, 3);
+            this.WESTOthers = this.WESTOthers.concat(thisDiv.slice(3));
           }
         });
 
-      // Suspended for 2020-21 Season (56-game covid shortened)
-      // this.WESTOthers.sort(sortConference);
+      this.WESTOthers.sort(sortConference);
 
-      // if (sortDivision(this.WESTCentral[0], this.WESTPacific[0]) === 1) {
-      //   // Pacific is better, they get the #2 WC
-      //   this.WESTCentral.push(this.WESTOthers[0]);
-      //   this.WESTPacific.push(this.WESTOthers[1]);
-      // } else {
-      //   // Central is better, they get the #2 WC
-      //   this.WESTCentral.push(this.WESTOthers[1]);
-      //   this.WESTPacific.push(this.WESTOthers[0]);
-      // }
+      if (sortDivision(this.WESTCentral[0], this.WESTPacific[0]) === 1) {
+        // Pacific is better, they get the #2 WC
+        this.WESTCentral.push(this.WESTOthers[0]);
+        this.WESTPacific.push(this.WESTOthers[1]);
+      } else {
+        // Central is better, they get the #2 WC
+        this.WESTCentral.push(this.WESTOthers[1]);
+        this.WESTPacific.push(this.WESTOthers[0]);
+      }
 
       this.WESTHunt = [];
-      this.WESTHunt.push(this.WESTOthers[0]);
-      this.WESTHunt.push(this.WESTOthers[1]);
+      this.WESTHunt.push(this.WESTOthers[2]);
       this.WESTHunt.push(this.WESTOthers[3]);
       this.WESTHunt.push(this.WESTOthers[4]);
-      // this.WESTHunt.push(this.WESTOthers[2]);
-      // this.WESTHunt.push(this.WESTOthers[3]);
-      // this.WESTHunt.push(this.WESTOthers[4]);
-      // this.WESTHunt.push(this.WESTOthers[5]);
-      this.WESTHunt.sort(sortConference); // Covid
+      this.WESTHunt.push(this.WESTOthers[5]);
     }
   }
 
