@@ -30,7 +30,7 @@ export const _TEAMS: ITeam[] = [
   { 'city': 'Edmonton',     'name': 'Oilers',         'abbrev': 'EDM', 'lightcolor': 'BD8442', 'darkcolor': '00295A', 'chartcolor': 'BD8442', 'division': 'West Pacific',  'of': 8, 'de': 6, 'pp': 8, 'pk': 6, 'go': 7, 'co': 7 },
   { 'city': 'Los Angeles',  'name': 'Kings',          'abbrev': 'LA',  'lightcolor': '94928C', 'darkcolor': '040204', 'chartcolor': '94928C', 'division': 'West Pacific',  'of': 8, 'de': 7, 'pp': 8, 'pk': 9, 'go': 8, 'co': 7 },
   { 'city': 'San Jose',     'name': 'Sharks',         'abbrev': 'SJ',  'lightcolor': '007BA5', 'darkcolor': '000000', 'chartcolor': '007BA5', 'division': 'West Pacific',  'of': 6, 'de': 6, 'pp': 6, 'pk': 7, 'go': 6, 'co': 7 },
-  { 'city': 'Seattle',      'name': 'Kraken',         'abbrev': 'SEA', 'lightcolor': '639FB6', 'darkcolor': '001425', 'chartcolor': 'FBB600', 'division': 'West Pacific',  'of': 5, 'de': 5, 'pp': 5, 'pk': 5, 'go': 5, 'co': 7 },
+  { 'city': 'Seattle',      'name': 'Kraken',         'abbrev': 'SEA', 'lightcolor': '639FB6', 'darkcolor': '001425', 'chartcolor': '001425', 'division': 'West Pacific',  'of': 5, 'de': 5, 'pp': 5, 'pk': 5, 'go': 5, 'co': 7 },
   { 'city': 'Vancouver',    'name': 'Canucks',        'abbrev': 'VAN', 'lightcolor': 'ADAEF7', 'darkcolor': '00205E', 'chartcolor': 'ADAEF7', 'division': 'West Pacific',  'of': 7, 'de': 5, 'pp': 6, 'pk': 8, 'go': 6, 'co': 7 },
   { 'city': 'Vegas',        'name': 'Golden Knights', 'abbrev': 'LV',  'lightcolor': '8E7349', 'darkcolor': '344248', 'chartcolor': '8E7349', 'division': 'West Pacific',  'of': 8, 'de': 9, 'pp': 7, 'pk': 9, 'go': 9, 'co': 7 }
 ];
