@@ -13,7 +13,7 @@ export class ScheduleCalenderComponent implements OnInit, AfterContentInit {
   calendarArr: NHLCalendar[] = [];
   gameDay: string;
   gamesArr: ISchedule[] = [];
-  scheduleYear: number = 2020;
+  scheduleYear: number = 2021;
   scheduleYears: string = '2021-22';
   fullSchedule: ISchedule[];
 
