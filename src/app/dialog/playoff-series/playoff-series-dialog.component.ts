@@ -5,11 +5,13 @@ import { ITeam, ISchedule, IPlayoffSeries } from '@app/model/nhl.model';
 import { PlayoffService } from '@app/service/playoff.service';
 import { ResultsDialogComponent } from '@app/dialog/results/results-dialog.component';
 import { MatchupDialogComponent } from '@app/dialog/matchup/matchup-dialog.component';
+import { matchAnimationLeft, matchAnimationRight, ratingAnimation } from '@app/shared/animations';
 
 @Component({
   selector: 'app-playoff-series-dialog',
   templateUrl: './playoff-series-dialog.component.html',
-  styleUrls: ['./playoff-series-dialog.component.scss']
+  styleUrls: ['./playoff-series-dialog.component.scss'],
+  animations: [matchAnimationLeft, matchAnimationRight, ratingAnimation]
 })
 export class PlayoffSeriesDialogComponent implements OnInit {
     teamsArr: ITeam[] = [];
@@ -17,6 +19,7 @@ export class PlayoffSeriesDialogComponent implements OnInit {
     games: ISchedule[] = [];
     loading: boolean = true;
     odds: number = 0;
+    attrTypes: string[] = ['of', 'de', 'pp', 'pk', 'go', 'co'];
 
     dialogReturn: any;
 
