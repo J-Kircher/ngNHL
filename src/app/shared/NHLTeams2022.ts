@@ -36,5 +36,5 @@ export const _TEAMS: ITeam[] = [
 ];
 
 // Created on Tue Jul 19, 2022
-// Modified on Fri Jan 27, 2023
+// Modified on Mon Apr 17, 2023
 // end of NHLTeams2022
